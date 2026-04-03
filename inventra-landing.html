@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventra — The Intelligent OS for African Commerce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050810;
+    --bg2: #080d1a;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --cyan: #00e5ff;
+    --amber: #ffb300;
+    --violet: #7c4dff;
+    --text: #e8edf5;
+    --muted: #6b7a99;
+    --glow-cyan: 0 0 40px rgba(0,229,255,0.25);
+    --glow-amber: 0 0 40px rgba(255,179,0,0.25);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.65; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 999; opacity: 0.5; }
+  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; line-height: 1.1; }
+  h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 800; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 800; letter-spacing: -0.02em; }
+  h3 { font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 700; }
+  .mono { font-family: 'Space Mono', monospace; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  section { position: relative; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(5,8,16,0.75); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: transform 0.3s ease; }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; letter-spacing: -0.01em; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--cyan); }
+  .nav-cta { background: var(--cyan); color: #050810; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; padding: 10px 22px; border: none; cursor: pointer; letter-spacing: 0.05em; text-transform: uppercase; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: #fff; transform: scale(1.04); }
+
+  /* BUTTONS */
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--cyan); color: #050810; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; padding: 16px 36px; border: none; cursor: pointer; text-decoration: none; clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); transition: all 0.25s; position: relative; overflow: hidden; }
+  .btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transform: translateX(-100%); transition: transform 0.4s; }
+  .btn-primary:hover::after { transform: translateX(100%); }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: var(--glow-cyan); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--text); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; padding: 15px 32px; border: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: all 0.25s; }
+  .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* TAGS */
+  .tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2); color: var(--cyan); font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 16px; border-radius: 2px; margin-bottom: 24px; }
+  .tag-amber { background: rgba(255,179,0,0.08); border-color: rgba(255,179,0,0.2); color: var(--amber); }
+  .tag-violet { background: rgba(124,77,255,0.08); border-color: rgba(124,77,255,0.2); color: #a67cff; }
+  .tag-red { background: rgba(255,82,82,0.08); border-color: rgba(255,82,82,0.2); color: #ff5252; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── HERO ── */
+  #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent); }
+  .hero-orb { position: absolute; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,229,255,0.1) 0%, rgba(124,77,255,0.05) 40%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .hero-orb2 { position: absolute; width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(255,179,0,0.07) 0%, transparent 70%); bottom: 5%; left: 15%; pointer-events: none; }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  #hero h1 { opacity: 0; animation: fadeUp 0.8s 0.4s forwards; margin-bottom: 28px; }
+  #hero h1 em { font-style: normal; color: var(--cyan); }
+  #hero h1 .accent { color: var(--amber); }
+  .hero-sub { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--muted); max-width: 580px; margin: 0 auto 48px; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+  .hero-metrics { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); opacity: 0; animation: fadeUp 0.8s 1s forwards; }
+  .metric { text-align: center; }
+  .metric-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.2rem; color: var(--text); letter-spacing: -0.02em; display: block; }
+  .metric-val em { font-style: normal; color: var(--cyan); }
+  .metric-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+
+  /* Hero dashboard */
+  .hero-visual { position: relative; width: 100%; max-width: 860px; margin: 56px auto 0; opacity: 0; animation: fadeUp 1s 0.9s forwards; }
+  .dashboard-mock { background: rgba(8,13,26,0.85); border: 1px solid rgba(0,229,255,0.15); border-radius: 12px; padding: 24px; backdrop-filter: blur(20px); box-shadow: 0 40px 100px rgba(0,0,0,0.6), var(--glow-cyan); overflow: hidden; position: relative; }
+  .dash-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; } .dot-y { background: #ffbd2e; } .dot-g { background: #28ca41; }
+  .dash-title { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-left: 8px; }
+  .dash-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--cyan); }
+  .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+  .dash-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .kpi-label { font-size: 0.62rem; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .kpi-val { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; }
+  .kpi-up { font-size: 0.62rem; color: #00e676; margin-top: 4px; font-family: 'Space Mono', monospace; }
+  .kpi-down { font-size: 0.62rem; color: #ff5252; margin-top: 4px; font-family: 'Space Mono', monospace; }
+  .dash-chart { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 14px; height: 110px; position: relative; }
+  .chart-label { font-size: 0.62rem; color: var(--muted); font-family: 'Space Mono', monospace; margin-bottom: 10px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 5px; height: 65px; }
+  .bar { flex: 1; border-radius: 3px 3px 0 0; background: rgba(0,229,255,0.15); border: 1px solid rgba(0,229,255,0.3); }
+  .bar.hi { background: rgba(0,229,255,0.5); }
+  .dash-ar { position: absolute; top: 12px; right: 12px; background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.25); color: var(--cyan); font-family: 'Space Mono', monospace; font-size: 0.6rem; padding: 4px 10px; border-radius: 2px; letter-spacing: 0.1em; }
+
+  /* ── PROBLEM ── */
+  #problem { padding: 120px 24px; background: var(--bg2); }
+  .problem-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .problem-copy h2 em { font-style: normal; color: #ff5252; }
+  .problem-copy p { color: var(--muted); margin-top: 20px; font-size: 1.05rem; font-weight: 300; }
+  .pain-list { margin-top: 36px; display: flex; flex-direction: column; gap: 14px; }
+  .pain-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 20px; background: rgba(255,82,82,0.04); border: 1px solid rgba(255,82,82,0.1); border-radius: 6px; border-left: 3px solid #ff5252; }
+  .pain-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+  .pain-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.92rem; }
+  .pain-desc { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
+  .problem-visual { position: relative; display: flex; align-items: center; justify-content: center; }
+  .broken-dash { background: rgba(255,82,82,0.04); border: 1px solid rgba(255,82,82,0.12); border-radius: 10px; padding: 32px; width: 100%; max-width: 400px; position: relative; }
+  .broken-row { height: 13px; border-radius: 3px; background: rgba(255,82,82,0.18); margin-bottom: 10px; }
+  .broken-row:nth-child(odd) { width: 80%; }
+  .broken-row:nth-child(even) { width: 60%; }
+  .error-badge { position: absolute; top: -12px; right: -12px; background: #ff5252; color: #fff; font-family: 'Space Mono', monospace; font-size: 0.62rem; padding: 6px 12px; font-weight: 700; border-radius: 3px; }
+  .stat-float { position: absolute; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; font-family: 'Space Mono', monospace; font-size: 0.7rem; }
+  .stat-float-1 { bottom: -24px; left: -24px; color: #ff5252; }
+  .stat-float-2 { top: -24px; left: -24px; color: var(--amber); }
+  .sf-num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; display: block; }
+
+  /* ── SHIFT ── */
+  #shift { padding: 140px 24px; text-align: center; overflow: hidden; }
+  #shift::before { content: ''; position: absolute; width: 1000px; height: 600px; background: radial-gradient(ellipse, rgba(124,77,255,0.09) 0%, transparent 65%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .shift-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+  #shift h2 em { font-style: normal; color: #a67cff; }
+  .shift-lead { font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--muted); font-weight: 300; margin-bottom: 56px; line-height: 1.85; }
+  .shift-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 40px; }
+  .shift-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .shift-card:hover { border-color: rgba(124,77,255,0.35); transform: translateY(-4px); }
+  .shift-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--violet), var(--cyan)); opacity: 0; transition: opacity 0.3s; }
+  .shift-card:hover::after { opacity: 1; }
+  .shift-icon { font-size: 1.8rem; margin-bottom: 16px; }
+  .shift-card h3 { font-size: 1rem; margin-bottom: 10px; }
+  .shift-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+
+  /* ── PRODUCT ── */
+  #product { padding: 120px 24px; background: var(--bg2); overflow: hidden; }
+  .product-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  #product h2 em { font-style: normal; color: var(--cyan); }
+  #product > .product-inner > div > p { color: var(--muted); margin-top: 18px; font-weight: 300; line-height: 1.8; }
+  .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .pill { background: rgba(0,229,255,0.06); border: 1px solid rgba(0,229,255,0.15); color: var(--cyan); font-family: 'Space Mono', monospace; font-size: 0.68rem; padding: 7px 14px; border-radius: 100px; letter-spacing: 0.05em; }
+  .pill-amber { background: rgba(255,179,0,0.06); border-color: rgba(255,179,0,0.15); color: var(--amber); }
+  .pill-violet { background: rgba(124,77,255,0.06); border-color: rgba(124,77,255,0.15); color: #a67cff; }
+  .product-visual { background: rgba(0,229,255,0.03); border: 1px solid rgba(0,229,255,0.12); border-radius: 14px; padding: 32px; }
+  .product-logo-big { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.8rem; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .product-logo-big span { color: var(--cyan); }
+  .product-tagline-big { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .product-caps { display: flex; flex-direction: column; gap: 12px; }
+  .cap-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.3s; }
+  .cap-row:hover { border-color: rgba(0,229,255,0.25); }
+  .cap-icon-wrap { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.1); border-radius: 8px; font-size: 1rem; flex-shrink: 0; }
+  .cap-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; }
+  .cap-desc { font-size: 0.76rem; color: var(--muted); }
+  .cap-badge { margin-left: auto; font-family: 'Space Mono', monospace; font-size: 0.58rem; padding: 4px 8px; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.2); white-space: nowrap; }
+  .cap-badge-amber { background: rgba(255,179,0,0.1); color: var(--amber); border-color: rgba(255,179,0,0.2); }
+
+  /* ── HOW IT WORKS ── */
+  #how { padding: 140px 24px; text-align: center; }
+  .how-inner { max-width: 1120px; margin: 0 auto; }
+  .how-sub { color: var(--muted); margin-bottom: 72px; font-size: 1.05rem; font-weight: 300; }
+  .steps-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+  .steps-track::before { content: ''; position: absolute; top: 56px; left: 17%; right: 17%; height: 1px; background: linear-gradient(90deg, var(--cyan), var(--violet), var(--amber)); }
+  .step { padding: 0 20px; }
+  .step-num-wrap { width: 56px; height: 56px; border-radius: 50%; background: var(--bg2); border: 2px solid var(--cyan); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; position: relative; z-index: 1; }
+  .step:nth-child(2) .step-num-wrap { border-color: var(--violet); }
+  .step:nth-child(3) .step-num-wrap { border-color: var(--amber); }
+  .step-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--cyan); }
+  .step:nth-child(2) .step-num { color: var(--violet); }
+  .step:nth-child(3) .step-num { color: var(--amber); }
+  .step h3 { margin-bottom: 12px; font-size: 1.05rem; }
+  .step p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+
+  /* ── AI ENGINE ── */
+  #ai-engine { padding: 120px 24px; background: var(--bg2); overflow: hidden; position: relative; }
+  #ai-engine::before { content: ''; position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 65%); top: -100px; right: -100px; pointer-events: none; }
+  .ai-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  #ai-engine h2 em { font-style: normal; color: var(--cyan); }
+  #ai-engine .ai-copy p { color: var(--muted); font-weight: 300; margin-top: 18px; margin-bottom: 32px; line-height: 1.8; }
+  .ai-capabilities { display: flex; flex-direction: column; gap: 12px; }
+  .ai-cap { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: rgba(0,229,255,0.03); border: 1px solid rgba(0,229,255,0.1); border-radius: 8px; transition: all 0.3s; }
+  .ai-cap:hover { background: rgba(0,229,255,0.07); border-color: rgba(0,229,255,0.25); transform: translateX(4px); }
+  .ai-cap-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); margin-top: 6px; flex-shrink: 0; box-shadow: 0 0 10px var(--cyan); }
+  .ai-cap h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 3px; }
+  .ai-cap p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+  .ai-visual { display: flex; align-items: center; justify-content: center; }
+  .ai-brain-wrap { width: 300px; height: 300px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .ai-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(0,229,255,0.12); }
+  .ai-ring-1 { width: 100%; height: 100%; animation: rotate 20s linear infinite; }
+  .ai-ring-2 { width: 72%; height: 72%; border-color: rgba(124,77,255,0.15); animation: rotate 12s linear infinite reverse; }
+  .ai-ring-3 { width: 47%; height: 47%; border-color: rgba(0,229,255,0.2); animation: rotate 8s linear infinite; }
+  .ai-ring-1::before { content: ''; position: absolute; width: 8px; height: 8px; background: var(--cyan); border-radius: 50%; top: 0; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px var(--cyan); }
+  .ai-ring-2::before { content: ''; position: absolute; width: 6px; height: 6px; background: var(--violet); border-radius: 50%; bottom: 0; right: 0; box-shadow: 0 0 10px var(--violet); }
+  .ai-core { width: 110px; height: 110px; background: radial-gradient(circle, rgba(0,229,255,0.2), rgba(0,229,255,0.05)); border-radius: 50%; border: 1px solid rgba(0,229,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; position: relative; z-index: 2; animation: breathe 3s ease-in-out infinite; }
+
+  /* ── AR EXPERIENCE ── */
+  #ar-experience { padding: 120px 24px; position: relative; overflow: hidden; }
+  #ar-experience::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,229,255,0.02), transparent 50%, rgba(255,179,0,0.02)); }
+  .ar-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  #ar-experience h2 em { font-style: normal; color: var(--amber); }
+  .ar-copy p { color: var(--muted); font-weight: 300; margin: 18px 0 32px; line-height: 1.8; }
+  .ar-features { display: flex; flex-direction: column; gap: 12px; }
+  .ar-feat { display: flex; gap: 14px; align-items: center; padding: 14px 18px; background: rgba(255,179,0,0.03); border: 1px solid rgba(255,179,0,0.1); border-radius: 8px; transition: all 0.3s; }
+  .ar-feat:hover { background: rgba(255,179,0,0.07); border-color: rgba(255,179,0,0.28); }
+  .ar-feat-icon { font-size: 1.15rem; flex-shrink: 0; }
+  .ar-feat strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; font-size: 0.88rem; }
+  .ar-feat span { font-size: 0.8rem; color: var(--muted); }
+  .ar-visual { position: relative; aspect-ratio: 1; max-width: 420px; }
+  .ar-scene { width: 100%; height: 100%; background: rgba(255,179,0,0.03); border: 1px solid rgba(255,179,0,0.15); border-radius: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+  .ar-scene::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,179,0,0.015) 3px, rgba(255,179,0,0.015) 4px); }
+  .ar-crosshair { width: 200px; height: 200px; position: relative; }
+  .ar-crosshair::before, .ar-crosshair::after { content: ''; position: absolute; border: 2px solid rgba(255,179,0,0.4); }
+  .ar-crosshair::before { top: 0; left: 0; width: 40px; height: 40px; border-right: none; border-bottom: none; }
+  .ar-crosshair::after { bottom: 0; right: 0; width: 40px; height: 40px; border-left: none; border-top: none; }
+  .ar-box { position: absolute; background: rgba(255,179,0,0.07); border: 1px solid rgba(255,179,0,0.3); border-radius: 4px; }
+  .ar-box-1 { width: 80px; height: 50px; top: 30%; left: 15%; animation: arFloat 4s ease-in-out infinite; }
+  .ar-box-2 { width: 60px; height: 60px; top: 50%; right: 20%; animation: arFloat 4s ease-in-out 1s infinite; }
+  .ar-box-3 { width: 100px; height: 40px; bottom: 30%; left: 30%; animation: arFloat 4s ease-in-out 2s infinite; }
+  .ar-label { position: absolute; background: rgba(255,179,0,0.15); border: 1px solid rgba(255,179,0,0.3); color: var(--amber); font-family: 'Space Mono', monospace; font-size: 0.58rem; padding: 4px 8px; border-radius: 2px; white-space: nowrap; }
+  .ar-label-1 { top: 20%; right: 8%; }
+  .ar-label-2 { bottom: 22%; left: 8%; }
+  .ar-scan-line { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--amber), transparent); animation: scanLine 3s ease-in-out infinite; box-shadow: 0 0 10px var(--amber); }
+  .ar-corner { position: absolute; }
+  .ar-corner::before, .ar-corner::after { content: ''; position: absolute; background: var(--amber); opacity: 0.5; }
+  .ar-corner-tl { top: 14px; left: 14px; }
+  .ar-corner-tl::before { width: 20px; height: 2px; }
+  .ar-corner-tl::after { width: 2px; height: 20px; }
+  .ar-corner-br { bottom: 14px; right: 14px; }
+  .ar-corner-br::before { width: 20px; height: 2px; right: 0; bottom: 0; }
+  .ar-corner-br::after { width: 2px; height: 20px; right: 0; bottom: 0; }
+
+  /* ── VR DASHBOARD ── */
+  #vr-dashboard { padding: 120px 24px; background: var(--bg2); position: relative; overflow: hidden; }
+  #vr-dashboard::before { content: ''; position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(124,77,255,0.09) 0%, transparent 65%); bottom: -200px; left: -100px; }
+  .vr-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  #vr-dashboard h2 em { font-style: normal; color: #a67cff; }
+  .vr-copy p { color: var(--muted); font-weight: 300; margin: 18px 0 32px; line-height: 1.8; }
+  .vr-features { display: flex; flex-direction: column; gap: 12px; }
+  .vr-feat { display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px; background: rgba(124,77,255,0.03); border: 1px solid rgba(124,77,255,0.1); border-radius: 8px; transition: all 0.3s; }
+  .vr-feat:hover { background: rgba(124,77,255,0.08); border-color: rgba(124,77,255,0.28); }
+  .vr-feat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.3rem; color: rgba(124,77,255,0.4); flex-shrink: 0; line-height: 1; }
+  .vr-feat h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+  .vr-feat p { font-size: 0.8rem; color: var(--muted); }
+  .vr-visual { max-width: 420px; }
+  .vr-headset-mock { background: rgba(124,77,255,0.05); border: 1px solid rgba(124,77,255,0.18); border-radius: 14px; padding: 28px; position: relative; }
+  .vr-screen { background: rgba(124,77,255,0.1); border: 1px solid rgba(124,77,255,0.22); border-radius: 8px; padding: 20px; position: relative; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+  .vr-screen::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(124,77,255,0.12), transparent 70%); }
+  .vr-hud-row { display: flex; gap: 10px; position: relative; z-index: 1; }
+  .vr-hud-card { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(124,77,255,0.22); border-radius: 6px; padding: 10px; }
+  .vr-hud-label { font-family: 'Space Mono', monospace; font-size: 0.56rem; color: #a67cff; letter-spacing: 0.1em; text-transform: uppercase; }
+  .vr-hud-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-top: 4px; }
+  .vr-hud-bar { height: 3px; background: rgba(124,77,255,0.2); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+  .vr-hud-fill { height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan)); border-radius: 2px; }
+  .vr-tag { position: absolute; bottom: -10px; right: -10px; background: var(--violet); color: #fff; font-family: 'Space Mono', monospace; font-size: 0.58rem; padding: 6px 12px; border-radius: 3px; letter-spacing: 0.05em; }
+
+  /* ── SOCIAL PROOF ── */
+  #social-proof { padding: 120px 24px; text-align: center; }
+  .proof-inner { max-width: 1120px; margin: 0 auto; }
+  .proof-sub { color: var(--muted); margin-bottom: 60px; font-weight: 300; }
+  .logos-bar { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .logo-badge { padding: 10px 28px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.06em; border-right: 1px solid var(--border); transition: color 0.3s; }
+  .logo-badge:hover { color: var(--text); }
+  .logo-badge:last-child { border-right: none; }
+  .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+  .testimonial { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 28px; transition: all 0.3s; position: relative; }
+  .testimonial:hover { border-color: rgba(0,229,255,0.2); transform: translateY(-3px); }
+  .testimonial::before { content: '"'; position: absolute; top: 14px; left: 20px; font-family: 'Syne', sans-serif; font-size: 3rem; color: var(--cyan); opacity: 0.25; line-height: 1; }
+  .testimonial-text { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 20px; padding-top: 14px; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--violet)); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; color: #050810; flex-shrink: 0; }
+  .author-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.86rem; }
+  .author-role { font-size: 0.72rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+  /* ── USE CASES ── */
+  #use-cases { padding: 120px 24px; background: var(--bg2); }
+  .use-inner { max-width: 1120px; margin: 0 auto; }
+  .use-sub { text-align: center; color: var(--muted); margin-bottom: 60px; font-weight: 300; }
+  .use-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .use-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 32px 28px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .use-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--violet)); transform: scaleX(0); transition: transform 0.3s; transform-origin: left; }
+  .use-card:hover::before { transform: scaleX(1); }
+  .use-card:hover { border-color: rgba(0,229,255,0.12); transform: translateY(-4px); }
+  .use-emoji { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .use-card h3 { font-size: 1rem; margin-bottom: 10px; }
+  .use-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; margin-bottom: 14px; }
+  .use-market { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--cyan); border-top: 1px solid var(--border); padding-top: 12px; }
+
+  /* ── COMPETITIVE ── */
+  #competitive { padding: 120px 24px; }
+  .comp-inner { max-width: 1120px; margin: 0 auto; }
+  .comp-sub { text-align: center; color: var(--muted); margin-bottom: 60px; font-weight: 300; }
+  .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: 10px; border: 1px solid var(--border); }
+  .comparison-table thead th { padding: 20px 24px; background: rgba(255,255,255,0.03); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.88rem; border-bottom: 1px solid var(--border); text-align: left; }
+  .comparison-table thead th:not(:first-child) { text-align: center; }
+  .comparison-table thead th.ours { background: rgba(0,229,255,0.08); color: var(--cyan); border-left: 1px solid rgba(0,229,255,0.18); border-right: 1px solid rgba(0,229,255,0.18); }
+  .comparison-table tbody td { padding: 15px 24px; border-bottom: 1px solid var(--border); font-size: 0.86rem; color: var(--muted); text-align: center; }
+  .comparison-table tbody td:first-child { color: var(--text); font-weight: 500; text-align: left; }
+  .comparison-table tbody td.ours { background: rgba(0,229,255,0.04); border-left: 1px solid rgba(0,229,255,0.08); border-right: 1px solid rgba(0,229,255,0.08); color: var(--text); font-weight: 600; font-size: 0.82rem; }
+  .comparison-table tbody tr:last-child td { border-bottom: none; }
+  .check { color: #00e676; } .cross { color: #ff5252; } .partial { color: var(--amber); }
+
+  /* ── PRICING ── */
+  #pricing { padding: 120px 24px; background: var(--bg2); }
+  .pricing-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
+  .pricing-sub { color: var(--muted); margin-bottom: 60px; font-weight: 300; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+  .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 36px 28px; transition: all 0.3s; position: relative; overflow: hidden; }
+  .price-card.featured { background: rgba(0,229,255,0.05); border-color: rgba(0,229,255,0.3); box-shadow: var(--glow-cyan); }
+  .price-card:hover { transform: translateY(-4px); }
+  .featured-badge { position: absolute; top: 16px; right: 16px; background: var(--cyan); color: #050810; font-family: 'Space Mono', monospace; font-size: 0.58rem; font-weight: 700; padding: 5px 10px; border-radius: 2px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .price-tier { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .price-amount { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.8rem; letter-spacing: -0.02em; line-height: 1; margin-bottom: 4px; }
+  .price-amount sup { font-size: 1.1rem; vertical-align: super; }
+  .price-period { font-size: 0.95rem; color: var(--muted); font-weight: 400; }
+  .price-desc { font-size: 0.84rem; color: var(--muted); margin-top: 8px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
+  .price-features li { display: flex; gap: 10px; align-items: center; font-size: 0.86rem; }
+  .price-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; }
+  .price-features li.na { color: var(--muted); }
+  .price-features li.na::before { content: '—'; color: var(--muted); }
+  .price-cta { display: block; text-align: center; padding: 14px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; border-radius: 6px; cursor: pointer; transition: all 0.25s; text-decoration: none; }
+  .price-cta-outline { border: 1px solid var(--border); color: var(--text); }
+  .price-cta-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+  .price-cta-filled { background: var(--cyan); color: #050810; border: none; }
+  .price-cta-filled:hover { background: #fff; }
+
+  /* ── FINAL CTA ── */
+  #final-cta { padding: 140px 24px; text-align: center; overflow: hidden; }
+  #final-cta::before { content: ''; position: absolute; width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(0,229,255,0.11) 0%, rgba(124,77,255,0.05) 50%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+  .final-inner { max-width: 680px; margin: 0 auto; position: relative; z-index: 2; }
+  .final-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 24px; }
+  #final-cta h2 em { font-style: normal; color: var(--cyan); }
+  .final-desc { color: var(--muted); margin: 20px 0 44px; font-size: 1.1rem; font-weight: 300; line-height: 1.85; }
+  .cta-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto 24px; }
+  .cta-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 16px 20px; border-radius: 4px; outline: none; transition: border-color 0.3s; }
+  .cta-input:focus { border-color: var(--cyan); }
+  .cta-input::placeholder { color: var(--muted); }
+  .urgency-text { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
+  .urgency-text span { color: var(--amber); }
+  .trust-signals { display: flex; justify-content: center; gap: 28px; margin-top: 40px; flex-wrap: wrap; }
+  .trust-sig { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .trust-sig em { font-style: normal; color: var(--cyan); }
+
+  /* ── FOOTER ── */
+  footer { padding: 48px 24px; border-top: 1px solid var(--border); }
+  .footer-inner { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+  .footer-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; }
+  .footer-logo span { color: var(--cyan); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.84rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+  .footer-copy { font-size: 0.75rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .footer-copy span { color: var(--cyan); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0,229,255,0.18); } 50% { transform: scale(1.06); box-shadow: 0 0 60px rgba(0,229,255,0.38); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+  @keyframes scanLine { 0% { top: 0%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+  @keyframes arFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-7px); } }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .problem-inner, .product-inner, .ai-inner, .ar-inner, .vr-inner { grid-template-columns: 1fr; gap: 48px; }
+    .shift-grid, .steps-track { grid-template-columns: 1fr; gap: 32px; }
+    .steps-track::before { display: none; }
+    .testimonials, .use-grid, .pricing-grid { grid-template-columns: 1fr; }
+    .dash-grid { grid-template-columns: repeat(2, 1fr); }
+    .logos-bar { flex-direction: column; }
+    .logo-badge { border-right: none; border-bottom: 1px solid var(--border); }
+    .cta-form { flex-direction: column; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .comparison-table { font-size: 0.75rem; }
+    .hero-metrics { gap: 20px; }
+    nav { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#" class="logo">Inven<span>tra</span></a>
+  <button class="nav-cta" onclick="document.getElementById('final-cta').scrollIntoView({behavior:'smooth'})">Get Early Access</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">▸ The Intelligent OS for African Commerce</div>
+    <h1>Your Business.<br><em>Finally</em> <span class="accent">Sees Everything.</span></h1>
+    <p class="hero-sub">Inventra fuses AI, Augmented Reality, and Virtual Reality into one unified platform — giving African businesses total intelligence over their inventory, supply chain, and growth.</p>
+    <div class="hero-ctas">
+      <a href="#final-cta" class="btn-primary">Get Early Access →</a>
+      <a href="#how" class="btn-ghost">See How It Works</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric"><span class="metric-val">3.2<em>×</em></span><span class="metric-label">Inventory Accuracy</span></div>
+      <div class="metric"><span class="metric-val">94<em>%</em></span><span class="metric-label">Waste Reduction</span></div>
+      <div class="metric"><span class="metric-val">12<em>s</em></span><span class="metric-label">Full Stock Audit</span></div>
+      <div class="metric"><span class="metric-val">₦<em>0</em></span><span class="metric-label">Hardware Needed</span></div>
+    </div>
+  </div>
+  <div class="hero-visual container">
+    <div class="dashboard-mock">
+      <div class="dash-header">
+        <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+        <span class="dash-title">INVENTRA OS — LIVE VIEW — LAGOS HUB</span>
+        <div class="dash-status"><div class="pulse"></div> LIVE</div>
+      </div>
+      <div class="dash-grid">
+        <div class="kpi-card"><div class="kpi-label">Total SKUs</div><div class="kpi-val">12,847</div><div class="kpi-up">↑ 3.2% this week</div></div>
+        <div class="kpi-card"><div class="kpi-label">AI Alerts</div><div class="kpi-val">7</div><div class="kpi-up">↓ 41% vs last week</div></div>
+        <div class="kpi-card"><div class="kpi-label">Demand Score</div><div class="kpi-val">92.4</div><div class="kpi-up">↑ Trending up</div></div>
+        <div class="kpi-card"><div class="kpi-label">Restock ETA</div><div class="kpi-val">2d 4h</div><div class="kpi-down">↓ 3 urgent items</div></div>
+      </div>
+      <div class="dash-chart">
+        <div class="chart-label">SALES VELOCITY — PAST 14 DAYS</div>
+        <div class="chart-bars" id="chartBars">
+          <div class="bar" data-h="40"></div><div class="bar" data-h="55"></div>
+          <div class="bar" data-h="45"></div><div class="bar" data-h="70"></div>
+          <div class="bar" data-h="60"></div><div class="bar" data-h="80"></div>
+          <div class="bar hi" data-h="95"></div><div class="bar" data-h="75"></div>
+          <div class="bar" data-h="88"></div><div class="bar" data-h="70"></div>
+          <div class="bar hi" data-h="100"></div><div class="bar" data-h="85"></div>
+          <div class="bar" data-h="92"></div><div class="bar hi" data-h="98"></div>
+        </div>
+        <div class="dash-ar">AR MODE READY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem">
+  <div class="problem-inner reveal">
+    <div class="problem-copy">
+      <div class="tag tag-red">⚠ The Reality</div>
+      <h2>African businesses are <em>flying blind.</em></h2>
+      <p>Every day, thousands of shops, warehouses, and distributors lose money — not because they don't work hard, but because they can't see clearly. The tools they rely on were built for someone else, somewhere else.</p>
+      <div class="pain-list">
+        <div class="pain-item"><div class="pain-icon">📉</div><div><div class="pain-title">Stockouts cost you daily</div><div class="pain-desc">Manual tracking leaves gaps. When a bestseller runs dry, you don't find out until a customer walks away.</div></div></div>
+        <div class="pain-item"><div class="pain-icon">🕳️</div><div><div class="pain-title">Shrinkage is invisible</div><div class="pain-desc">Pilferage, spoilage, miscounting — it bleeds profits silently across your entire operation, undetected.</div></div></div>
+        <div class="pain-item"><div class="pain-icon">📊</div><div><div class="pain-title">Spreadsheets aren't strategy</div><div class="pain-desc">Hours wasted reconciling data that's already outdated. You're making million-naira decisions on yesterday's guesses.</div></div></div>
+        <div class="pain-item"><div class="pain-icon">🌍</div><div><div class="pain-title">Western software doesn't fit</div><div class="pain-desc">Built for stable infrastructure, foreign currencies, and supply chains that bear no resemblance to yours.</div></div></div>
+      </div>
+    </div>
+    <div class="problem-visual">
+      <div class="broken-dash">
+        <div class="broken-row"></div><div class="broken-row"></div><div class="broken-row"></div>
+        <div class="broken-row"></div><div class="broken-row"></div><div class="broken-row"></div>
+        <div class="broken-row"></div><div class="broken-row"></div>
+        <div class="error-badge">ERROR: DATA MISMATCH</div>
+      </div>
+      <div class="stat-float stat-float-1"><span class="sf-num">₦2.8T</span>lost annually to poor inventory management in sub-Saharan Africa</div>
+      <div class="stat-float stat-float-2"><span class="sf-num">67%</span>of SMEs still rely on spreadsheets or paper for inventory</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SHIFT ─── -->
+<section id="shift">
+  <div class="shift-inner reveal">
+    <div class="tag tag-violet" style="margin: 0 auto 24px;">◈ The New Era</div>
+    <h2>What if your inventory<br>could <em>think for itself?</em></h2>
+    <p class="shift-lead">We're not building a better spreadsheet. We're building a different reality — one where AI anticipates demand before it happens, AR lets you see every item without scanning, and VR puts you inside your operation from anywhere on the continent.</p>
+    <div class="shift-grid">
+      <div class="shift-card"><div class="shift-icon">🧠</div><h3>AI That Predicts, Not Reports</h3><p>Instead of telling you what happened, Inventra tells you what's about to happen — demand surges, supply gaps, and optimal reorder windows before you feel the pain.</p></div>
+      <div class="shift-card"><div class="shift-icon">👁️</div><h3>AR That Sees Through Walls</h3><p>Point your phone at any shelf or warehouse and watch live inventory data overlay reality. No manual counting. No guessing. Just clarity.</p></div>
+      <div class="shift-card"><div class="shift-icon">🌐</div><h3>VR That Puts You Everywhere</h3><p>Walk through your Lagos warehouse while sitting in Abuja. Review operations in an immersive 3D environment that feels like being there.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRODUCT INTRO ─── -->
+<section id="product">
+  <div class="product-inner reveal">
+    <div>
+      <div class="tag">◎ Introducing Inventra</div>
+      <h2>The <em>Intelligent OS</em> for Commerce in Africa</h2>
+      <p>Inventra isn't software you install and forget. It's a living system that learns your business, adapts to your market, and gets smarter with every transaction — built ground-up for African trade realities.</p>
+      <p>One platform. Every layer of your inventory operation. Total intelligence.</p>
+      <div class="feature-pills">
+        <span class="pill">AI Forecasting</span><span class="pill">AR Scanning</span><span class="pill">VR Operations</span>
+        <span class="pill-amber">Multi-currency</span><span class="pill-amber">Offline-first</span>
+        <span class="pill-violet">Predictive Restocking</span><span class="pill-violet">Supply Chain AI</span>
+        <span class="pill">Mobile-native</span>
+      </div>
+      <div style="margin-top: 40px;"><a href="#final-cta" class="btn-primary">Get Early Access →</a></div>
+    </div>
+    <div class="product-visual">
+      <div class="product-logo-big">Inven<span>tra</span></div>
+      <div class="product-tagline-big">THE INTELLIGENT OPERATING SYSTEM FOR AFRICAN COMMERCE</div>
+      <div class="product-caps">
+        <div class="cap-row"><div class="cap-icon-wrap">🧠</div><div><div class="cap-name">Inventra Intelligence</div><div class="cap-desc">AI demand forecasting &amp; anomaly detection</div></div><span class="cap-badge">LIVE</span></div>
+        <div class="cap-row"><div class="cap-icon-wrap">👓</div><div><div class="cap-name">Inventra AR</div><div class="cap-desc">Real-world inventory overlay &amp; scanning</div></div><span class="cap-badge">BETA</span></div>
+        <div class="cap-row"><div class="cap-icon-wrap">🌐</div><div><div class="cap-name">Inventra VR Hub</div><div class="cap-desc">Immersive multi-location management</div></div><span class="cap-badge cap-badge-amber">Q3 2025</span></div>
+        <div class="cap-row"><div class="cap-icon-wrap">📡</div><div><div class="cap-name">Inventra Connect</div><div class="cap-desc">Supplier network &amp; logistics API</div></div><span class="cap-badge">LIVE</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section id="how">
+  <div class="how-inner reveal">
+    <div class="tag" style="margin: 0 auto 16px;">◈ Simple by Design</div>
+    <h2>Live in 3 Steps.</h2>
+    <p class="how-sub">No hardware. No expensive consultants. No months-long onboarding. Just intelligence, activated.</p>
+    <div class="steps-track">
+      <div class="step"><div class="step-num-wrap"><span class="step-num">01</span></div><h3>Connect Your Business</h3><p>Link your POS, supplier data, or import a spreadsheet. Inventra maps your full inventory ecosystem in under 10 minutes.</p></div>
+      <div class="step"><div class="step-num-wrap"><span class="step-num">02</span></div><h3>AI Learns Your Patterns</h3><p>Over the first 7 days, the AI engine analyzes demand cycles, seasonal patterns, supplier lead times, and risk factors unique to your market.</p></div>
+      <div class="step"><div class="step-num-wrap"><span class="step-num">03</span></div><h3>Command with Clarity</h3><p>From day 8, Inventra surfaces predictions, alerts, and AR-powered visibility tools so you can make decisions in seconds, not hours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI ENGINE ─── -->
+<section id="ai-engine">
+  <div class="ai-inner reveal">
+    <div class="ai-copy">
+      <div class="tag">◎ Under the Hood</div>
+      <h2>An AI Engine<br>Built for <em>African Commerce</em></h2>
+      <p>Most AI tools are trained on Western market data. Inventra's intelligence layer was built on African trade patterns — understanding seasonal spikes tied to local holidays, informal supply chains, multi-vendor sourcing, and infrastructural unpredictability.</p>
+      <div class="ai-capabilities">
+        <div class="ai-cap"><div class="ai-cap-dot"></div><div><h4>Demand Forecasting Engine</h4><p>Predicts sales velocity and demand surges up to 30 days ahead with 94% accuracy.</p></div></div>
+        <div class="ai-cap"><div class="ai-cap-dot"></div><div><h4>Anomaly Detection</h4><p>Flags unusual patterns — theft, spoilage, data entry errors — before they compound into losses.</p></div></div>
+        <div class="ai-cap"><div class="ai-cap-dot"></div><div><h4>Smart Reorder Intelligence</h4><p>Calculates optimal reorder points factoring supplier reliability, cash flow, and lead time variance.</p></div></div>
+        <div class="ai-cap"><div class="ai-cap-dot"></div><div><h4>Natural Language Control</h4><p>Ask Inventra anything in plain English or Pidgin. "What's running low in Ikeja?" — done.</p></div></div>
+      </div>
+    </div>
+    <div class="ai-visual">
+      <div class="ai-brain-wrap">
+        <div class="ai-ring ai-ring-1"></div>
+        <div class="ai-ring ai-ring-2"></div>
+        <div class="ai-ring ai-ring-3"></div>
+        <div class="ai-core">🧠</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AR EXPERIENCE ─── -->
+<section id="ar-experience">
+  <div class="ar-inner reveal">
+    <div class="ar-visual">
+      <div class="ar-scene">
+        <div class="ar-corner ar-corner-tl"></div>
+        <div class="ar-corner ar-corner-br"></div>
+        <div class="ar-crosshair">
+          <div class="ar-box ar-box-1"></div>
+          <div class="ar-box ar-box-2"></div>
+          <div class="ar-box ar-box-3"></div>
+          <div class="ar-label ar-label-1">SKU-4421 · 47 units ✓</div>
+          <div class="ar-label ar-label-2">SKU-1189 · LOW STOCK ⚠</div>
+        </div>
+        <div class="ar-scan-line"></div>
+      </div>
+    </div>
+    <div class="ar-copy">
+      <div class="tag tag-amber">◎ Inventra AR</div>
+      <h2>See Your Inventory<br>in <em>Real Space</em></h2>
+      <p>Open the Inventra AR mode on any smartphone. Point at a shelf. Watch live data materialize over every product — quantities, reorder urgency, price data, and AI alerts. No barcodes required. No wands. No dedicated hardware.</p>
+      <div class="ar-features">
+        <div class="ar-feat"><div class="ar-feat-icon">📱</div><div><strong>Works on any smartphone</strong><span>No expensive AR headsets. Just the phone in your pocket.</span></div></div>
+        <div class="ar-feat"><div class="ar-feat-icon">⚡</div><div><strong>Audit a shelf in 3 seconds</strong><span>AI-powered object recognition handles identification automatically.</span></div></div>
+        <div class="ar-feat"><div class="ar-feat-icon">🔴</div><div><strong>Live alerts overlaid in-view</strong><span>See exactly which items need restocking as you walk the floor.</span></div></div>
+        <div class="ar-feat"><div class="ar-feat-icon">🌐</div><div><strong>Offline-capable</strong><span>Core AR features work without internet — syncs when reconnected.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VR DASHBOARD ─── -->
+<section id="vr-dashboard">
+  <div class="vr-inner reveal">
+    <div class="vr-copy">
+      <div class="tag tag-violet">◎ Inventra VR Hub</div>
+      <h2>Manage Every Location<br>from <em>Anywhere</em></h2>
+      <p>Step into a virtual command center that renders your full operation in 3D. See inventory flows between locations, monitor live KPIs in spatial panels, and walk through remote warehouses — all from your headset or desktop browser.</p>
+      <div class="vr-features">
+        <div class="vr-feat"><div class="vr-feat-num">01</div><div><h4>3D Warehouse Walkthroughs</h4><p>Navigate a photorealistic model of your warehouse. Every shelf, every zone, every item — spatially mapped.</p></div></div>
+        <div class="vr-feat"><div class="vr-feat-num">02</div><div><h4>Multi-Location Command</h4><p>Switch between your Lagos store, Kano warehouse, and Accra branch in seconds. One view. Total control.</p></div></div>
+        <div class="vr-feat"><div class="vr-feat-num">03</div><div><h4>Immersive Data Panels</h4><p>KPIs, forecasts, and alerts float around you in space. Intuitive. Visual. Instantly actionable.</p></div></div>
+      </div>
+    </div>
+    <div class="vr-visual">
+      <div class="vr-headset-mock">
+        <div class="vr-screen">
+          <div class="vr-hud-row">
+            <div class="vr-hud-card"><div class="vr-hud-label">Lagos Hub</div><div class="vr-hud-val">98.2%</div><div class="vr-hud-bar"><div class="vr-hud-fill" style="width:98%"></div></div></div>
+            <div class="vr-hud-card"><div class="vr-hud-label">Kano Depot</div><div class="vr-hud-val">74.5%</div><div class="vr-hud-bar"><div class="vr-hud-fill" style="width:74%"></div></div></div>
+          </div>
+          <div class="vr-hud-row">
+            <div class="vr-hud-card"><div class="vr-hud-label">Accra Store</div><div class="vr-hud-val">81.0%</div><div class="vr-hud-bar"><div class="vr-hud-fill" style="width:81%"></div></div></div>
+            <div class="vr-hud-card"><div class="vr-hud-label">Nairobi WH</div><div class="vr-hud-val">62.3%</div><div class="vr-hud-bar"><div class="vr-hud-fill" style="width:62%"></div></div></div>
+          </div>
+        </div>
+        <div class="vr-tag">◈ VR MODE ACTIVE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOCIAL PROOF ─── -->
+<section id="social-proof">
+  <div class="proof-inner reveal">
+    <div class="tag" style="margin: 0 auto 16px;">◎ Early Traction</div>
+    <h2>Trusted by Builders,<br>Backed by Believers</h2>
+    <p class="proof-sub">From Tier-1 accelerators to Category-A retailers — the ecosystem is paying attention.</p>
+    <div class="logos-bar">
+      <div class="logo-badge">Y Combinator</div>
+      <div class="logo-badge">Google for Startups</div>
+      <div class="logo-badge">Techstars Africa</div>
+      <div class="logo-badge">Seedstars</div>
+      <div class="logo-badge">AfricArena</div>
+      <div class="logo-badge">Lagos Angel Network</div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial"><p class="testimonial-text">Within 6 days of beta access, our stockout rate dropped by more than half. The AI flagged 3 SKUs we had been overstocking for months. I don't know how we managed without it.</p><div class="testimonial-author"><div class="avatar">AC</div><div><div class="author-name">Adaeze Chibuike</div><div class="author-role">CEO · FMCG Distributor, Lagos</div></div></div></div>
+      <div class="testimonial"><p class="testimonial-text">We manage 4 pharmacies across Abuja. Before Inventra, stock reconciliation took 3 people two full days. Now the AR scan does it in under 10 minutes. Game-changing isn't the word.</p><div class="testimonial-author"><div class="avatar">IB</div><div><div class="author-name">Ibrahim Balogun</div><div class="author-role">Operations Director · PharmaNet</div></div></div></div>
+      <div class="testimonial"><p class="testimonial-text">The VR dashboard isn't just cool — it's operationally transformative. I ran a full multi-warehouse review from my phone on a bus. That kind of access used to require a flight.</p><div class="testimonial-author"><div class="avatar">FO</div><div><div class="author-name">Fatima Ouédraogo</div><div class="author-role">Founder · TradeLink West Africa</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── USE CASES ─── -->
+<section id="use-cases">
+  <div class="use-inner reveal">
+    <div class="tag" style="margin: 0 auto 16px;">◎ Built for Your Industry</div>
+    <h2 style="text-align:center;">One Platform. Every Market.</h2>
+    <p class="use-sub">Inventra adapts to the unique rhythms, risks, and requirements of each sector.</p>
+    <div class="use-grid">
+      <div class="use-card"><span class="use-emoji">🏪</span><h3>Retail &amp; FMCG</h3><p>Eliminate stockouts during peak periods. AI-driven demand forecasting ensures your shelves are full exactly when customers need them.</p><div class="use-market">↗ $320B African retail market</div></div>
+      <div class="use-card"><span class="use-emoji">💊</span><h3>Pharmaceuticals</h3><p>Track expiry dates, cold-chain compliance, and regulatory inventory in real time. Zero tolerance for error, fully automated.</p><div class="use-market">↗ $40B African pharma market</div></div>
+      <div class="use-card"><span class="use-emoji">🏭</span><h3>Manufacturing</h3><p>Monitor raw materials, WIP, and finished goods with factory-floor AR scanning and AI-optimized supply chain triggers.</p><div class="use-market">↗ $500B African manufacturing opportunity</div></div>
+      <div class="use-card"><span class="use-emoji">🚚</span><h3>Logistics &amp; 3PL</h3><p>Manage multi-client warehouses, track inbound shipments, and visualize dispatch queues with spatial VR mapping.</p><div class="use-market">↗ $180B African logistics market</div></div>
+      <div class="use-card"><span class="use-emoji">🌾</span><h3>Agribusiness</h3><p>Seasonal demand forecasting, perishable item tracking, and supply chain AI tailored to harvesting cycles and post-harvest loss prevention.</p><div class="use-market">↗ Largest African economic sector</div></div>
+      <div class="use-card"><span class="use-emoji">🏗️</span><h3>Construction &amp; Hardware</h3><p>Track thousands of SKUs across project sites. AR lets foremen do instant stock checks without leaving the floor.</p><div class="use-market">↗ $6T African infrastructure pipeline</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPETITIVE ─── -->
+<section id="competitive">
+  <div class="comp-inner reveal">
+    <div class="tag" style="margin: 0 auto 16px;">◎ Category Creation</div>
+    <h2 style="text-align:center;">Not Better Software.<br>A New Category.</h2>
+    <p class="comp-sub">We didn't improve what existed. We rebuilt the category from the ground up for African commerce.</p>
+    <table class="comparison-table">
+      <thead><tr>
+        <th>Capability</th>
+        <th class="ours">Inventra</th>
+        <th>TradeGecko</th>
+        <th>Cin7</th>
+        <th>Spreadsheets</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>AI Demand Forecasting</td><td class="ours check">✓ African-trained</td><td class="partial">Partial</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+        <tr><td>AR Inventory Scanning</td><td class="ours check">✓ No hardware</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+        <tr><td>VR Operations Hub</td><td class="ours check">✓ Multi-location</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+        <tr><td>Offline-first</td><td class="ours check">✓ Full offline</td><td class="cross">✗</td><td class="partial">Partial</td><td class="check">✓</td></tr>
+        <tr><td>Multi-currency (African)</td><td class="ours check">✓ 20+ currencies</td><td class="partial">Limited</td><td class="partial">Limited</td><td class="cross">Manual</td></tr>
+        <tr><td>Natural Language Queries</td><td class="ours check">✓ English + Pidgin</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+        <tr><td>Built for African markets</td><td class="ours check">✓ Ground-up</td><td class="cross">✗</td><td class="cross">✗</td><td class="cross">✗</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section id="pricing">
+  <div class="pricing-inner reveal">
+    <div class="tag" style="margin: 0 auto 16px;">◎ Simple Pricing</div>
+    <h2>Start Free. Scale Fast.</h2>
+    <p class="pricing-sub">No hidden fees. No complex tiers. Pricing built for African business realities.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount"><sup>₦</sup>0<span class="price-period"> /mo</span></div>
+        <p class="price-desc">For solo operators and early-stage businesses ready to step up from spreadsheets.</p>
+        <ul class="price-features">
+          <li>Up to 500 SKUs</li><li>AI alerts &amp; basic forecasting</li>
+          <li>AR scanning (50 scans/day)</li><li>1 location</li><li>Mobile app</li>
+          <li class="na">VR Dashboard</li><li class="na">Advanced AI engine</li><li class="na">API access</li>
+        </ul>
+        <a href="#final-cta" class="price-cta price-cta-outline">Start Free →</a>
+      </div>
+      <div class="price-card featured">
+        <div class="featured-badge">MOST POPULAR</div>
+        <div class="price-tier">Growth</div>
+        <div class="price-amount"><sup>₦</sup>49,999<span class="price-period"> /mo</span></div>
+        <p class="price-desc">For growing businesses managing multiple product lines and locations.</p>
+        <ul class="price-features">
+          <li>Unlimited SKUs</li><li>Full AI demand engine</li>
+          <li>Unlimited AR scanning</li><li>Up to 5 locations</li>
+          <li>VR Dashboard (3 users)</li><li>Multi-currency support</li>
+          <li>Supplier integrations</li><li class="na">Custom AI training</li>
+        </ul>
+        <a href="#final-cta" class="price-cta price-cta-filled">Get Early Access →</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Enterprise</div>
+        <div class="price-amount" style="font-size:2rem;line-height:1.3;">Custom</div>
+        <p class="price-desc">For large distributors, manufacturers, and multi-country operations.</p>
+        <ul class="price-features">
+          <li>Unlimited everything</li><li>Custom AI model training</li>
+          <li>Unlimited VR users</li><li>Unlimited locations</li>
+          <li>Dedicated API &amp; webhooks</li><li>White-label options</li>
+          <li>SLA &amp; priority support</li><li>Onsite onboarding</li>
+        </ul>
+        <a href="#final-cta" class="price-cta price-cta-outline">Talk to Sales →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ─── -->
+<section id="final-cta">
+  <div class="final-inner reveal">
+    <div class="final-eyebrow">▸ Limited Early Access — 500 Spots Remaining</div>
+    <h2>The Future of African<br>Commerce Starts <em>Now.</em></h2>
+    <p class="final-desc">Every day you wait is inventory lost, decisions delayed, and ground surrendered to competitors who move faster. Join 500 businesses already reshaping how Africa manages commerce.</p>
+    <div class="cta-form">
+      <input type="email" class="cta-input" placeholder="Enter your business email">
+      <a href="#" class="btn-primary">Get Access →</a>
+    </div>
+    <p class="urgency-text">🔒 Secure early access · <span>412 of 500 spots claimed</span> · No credit card required</p>
+    <div class="trust-signals">
+      <div class="trust-sig"><em>✓</em> Free to start</div>
+      <div class="trust-sig"><em>✓</em> Setup in 10 min</div>
+      <div class="trust-sig"><em>✓</em> Cancel anytime</div>
+      <div class="trust-sig"><em>✓</em> African support team</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Inven<span>tra</span></div>
+    <div class="footer-links">
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Docs</a>
+      <a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 Inventra Inc. · Built for <span>Africa.</span></div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Animate bars
+window.addEventListener('load', () => {
+  const bars = document.querySelectorAll('#chartBars .bar');
+  bars.forEach(b => {
+    const h = b.dataset.h + '%';
+    b.style.height = '0%';
+    setTimeout(() => { b.style.transition = 'height 1s ease'; b.style.height = h; }, 800);
+  });
+});
+
+// Nav hide/show on scroll
+let lastY = 0;
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  nav.style.transform = (y > lastY && y > 80) ? 'translateY(-100%)' : 'translateY(0)';
+  lastY = y;
+}, { passive: true });
+</script>
+</body>
+</html>
