@@ -16,11 +16,13 @@ export function Navbar() {
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
       setVisible(y < lastY || y < 80);
+      setScrolled(y > 20);
       setLastY(y);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -32,37 +34,70 @@ export function Navbar() {
       <nav
         style={{
           transform: visible ? "translateY(0)" : "translateY(-100%)",
-          transition: "transform 0.3s ease",
+          transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s",
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "18px 40px",
+          padding: "0 40px",
+          height: "64px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "var(--nav-bg)",
-          backdropFilter: "blur(20px)",
-          borderBottom: "1px solid var(--border)",
+          background: scrolled ? "var(--nav-bg)" : "transparent",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          boxShadow: scrolled ? "0 1px 0 var(--border)" : "none",
         }}
       >
+        {/* Logo */}
         <Link
           href="/"
           style={{
             fontFamily: "var(--font-syne), Syne, sans-serif",
             fontWeight: 800,
-            fontSize: "1.4rem",
-            letterSpacing: "-0.01em",
+            fontSize: "1.35rem",
+            letterSpacing: "-0.02em",
             color: "var(--text)",
             textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
+            gap: "2px",
           }}
         >
-          Inven<span style={{ color: "var(--cyan)" }}>tra</span>
+          <span>Inven</span>
+          <span style={{ color: "var(--cyan)" }}>tra</span>
+          <span
+            style={{
+              marginLeft: "8px",
+              background: "rgba(0,229,255,0.1)",
+              border: "1px solid rgba(0,229,255,0.2)",
+              color: "var(--cyan)",
+              fontFamily: "var(--font-space-mono), Space Mono, monospace",
+              fontSize: "0.52rem",
+              letterSpacing: "0.12em",
+              padding: "3px 8px",
+              borderRadius: "4px",
+              textTransform: "uppercase",
+              fontWeight: 400,
+            }}
+          >
+            OS
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop nav — pill container */}
+        <div
+          className="hidden md:flex"
+          style={{
+            alignItems: "center",
+            gap: "2px",
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "100px",
+            padding: "4px",
+          }}
+        >
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -70,19 +105,29 @@ export function Navbar() {
               style={{
                 color: "var(--muted)",
                 textDecoration: "none",
-                fontSize: "0.88rem",
+                fontSize: "0.82rem",
                 fontWeight: 500,
-                transition: "color 0.2s",
+                padding: "7px 18px",
+                borderRadius: "100px",
+                transition: "all 0.2s",
+                display: "inline-block",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--muted)")}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--text)";
+                e.currentTarget.style.background = "var(--surface2)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--muted)";
+                e.currentTarget.style.background = "transparent";
+              }}
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Right side */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <ThemeToggle />
           <Link
             href="/early-access"
@@ -91,36 +136,43 @@ export function Navbar() {
               color: "var(--bg)",
               fontFamily: "var(--font-syne), Syne, sans-serif",
               fontWeight: 700,
-              fontSize: "0.82rem",
-              padding: "10px 22px",
-              border: "none",
-              cursor: "pointer",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+              fontSize: "0.8rem",
+              padding: "9px 20px",
+              borderRadius: "8px",
               textDecoration: "none",
-              display: "inline-block",
-              transition: "background 0.2s, transform 0.2s",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              letterSpacing: "0.03em",
+              transition: "all 0.2s",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#fff";
-              e.currentTarget.style.transform = "scale(1.04)";
+              e.currentTarget.style.opacity = "0.88";
+              e.currentTarget.style.transform = "translateY(-1px)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--cyan)";
-              e.currentTarget.style.transform = "scale(1)";
+              e.currentTarget.style.opacity = "1";
+              e.currentTarget.style.transform = "translateY(0)";
             }}
           >
-            Get Early Access
+            Get Early Access →
           </Link>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden ml-2 text-[var(--muted)] hover:text-[var(--text)] transition-colors"
+            style={{
+              display: "none",
+              background: "transparent",
+              border: "none",
+              color: "var(--muted)",
+              cursor: "pointer",
+              padding: "4px",
+            }}
+            className="md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
@@ -130,17 +182,17 @@ export function Navbar() {
         <div
           style={{
             position: "fixed",
-            top: "65px",
+            top: "64px",
             left: 0,
             right: 0,
             zIndex: 99,
             background: "var(--mobile-menu-bg)",
-            backdropFilter: "blur(20px)",
+            backdropFilter: "blur(24px)",
             borderBottom: "1px solid var(--border)",
-            padding: "24px",
+            padding: "20px 24px",
             display: "flex",
             flexDirection: "column",
-            gap: "20px",
+            gap: "4px",
           }}
         >
           {navLinks.map((link) => (
@@ -153,30 +205,43 @@ export function Navbar() {
                 textDecoration: "none",
                 fontSize: "1rem",
                 fontWeight: 500,
+                padding: "12px 16px",
+                borderRadius: "10px",
+                transition: "all 0.2s",
+                display: "block",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--text)";
+                e.currentTarget.style.background = "var(--surface)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--muted)";
+                e.currentTarget.style.background = "transparent";
               }}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/early-access"
-            onClick={() => setMobileOpen(false)}
-            style={{
-              background: "var(--cyan)",
-              color: "var(--bg)",
-              fontFamily: "var(--font-syne), Syne, sans-serif",
-              fontWeight: 700,
-              fontSize: "0.85rem",
-              padding: "12px 20px",
-              textDecoration: "none",
-              display: "inline-block",
-              textAlign: "center",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-            }}
-          >
-            Get Early Access
-          </Link>
+          <div style={{ paddingTop: "12px", borderTop: "1px solid var(--border)", marginTop: "8px" }}>
+            <Link
+              href="/early-access"
+              onClick={() => setMobileOpen(false)}
+              style={{
+                background: "var(--cyan)",
+                color: "var(--bg)",
+                fontFamily: "var(--font-syne), Syne, sans-serif",
+                fontWeight: 700,
+                fontSize: "0.9rem",
+                padding: "13px 20px",
+                textDecoration: "none",
+                display: "block",
+                textAlign: "center",
+                borderRadius: "10px",
+              }}
+            >
+              Get Early Access →
+            </Link>
+          </div>
         </div>
       )}
     </>

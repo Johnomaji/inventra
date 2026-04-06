@@ -57,13 +57,17 @@ const rows = [
 function cellColor(val: string) {
   if (val.startsWith("✓")) return "#00e676";
   if (val === "✗") return "#ff5252";
-  if (val === "Partial" || val === "Limited" || val === "Manual") return "#ffb300";
+  if (val === "Partial" || val === "Limited" || val === "Manual")
+    return "#ffb300";
   return "var(--muted)";
 }
 
 export function Competitive() {
   return (
-    <section id="competitive" style={{ padding: "120px 24px" }}>
+    <section
+      id="competitive"
+      style={{ padding: "120px 24px", background: "var(--bg2)", overflow: "hidden" }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -71,124 +75,215 @@ export function Competitive() {
         transition={{ duration: 0.7 }}
         style={{ maxWidth: "1120px", margin: "0 auto" }}
       >
-        <div style={{ textAlign: "center", marginBottom: "16px" }}>
+        {/* Header */}
+        <div style={{ marginBottom: "56px" }}>
           <div
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(0,229,255,0.08)",
-              border: "1px solid rgba(0,229,255,0.2)",
-              color: "var(--cyan)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              padding: "7px 16px",
-              borderRadius: "2px",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "48px",
+              alignItems: "end",
             }}
           >
-            ◎ Category Creation
+            <div>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  background: "rgba(0,229,255,0.08)",
+                  border: "1px solid rgba(0,229,255,0.2)",
+                  color: "var(--cyan)",
+                  fontFamily:
+                    "var(--font-space-mono), Space Mono, monospace",
+                  fontSize: "0.68rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  padding: "7px 18px",
+                  borderRadius: "100px",
+                  marginBottom: "20px",
+                }}
+              >
+                ◎ Category Creation
+              </div>
+              <h2
+                style={{
+                  fontSize: "clamp(2rem, 4vw, 3.4rem)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.1,
+                }}
+              >
+                Not Better Software.
+                <br />A New Category.
+              </h2>
+            </div>
+            <div style={{ display: "flex", alignItems: "flex-end" }}>
+              <p
+                style={{
+                  color: "var(--muted)",
+                  fontWeight: 300,
+                  lineHeight: 1.75,
+                  fontSize: "1rem",
+                }}
+              >
+                We didn&apos;t improve what existed. We rebuilt the category
+                from the ground up for African commerce.
+              </p>
+            </div>
           </div>
         </div>
-        <h2
-          style={{
-            textAlign: "center",
-            fontSize: "clamp(2rem, 4vw, 3.4rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-            marginBottom: "16px",
-          }}
-        >
-          Not Better Software.
-          <br />A New Category.
-        </h2>
-        <p
-          style={{
-            textAlign: "center",
-            color: "var(--muted)",
-            marginBottom: "60px",
-            fontWeight: 300,
-          }}
-        >
-          We didn&apos;t improve what existed. We rebuilt the category from the ground
-          up for African commerce.
-        </p>
 
-        <div className="comp-table-wrap">
-          <table
+        {/* Table wrapped in styled card */}
+        <div
+          style={{
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "20px",
+            overflow: "hidden",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
+          }}
+        >
+          {/* Top gradient accent */}
+          <div
             style={{
-              width: "100%",
-              borderCollapse: "separate",
-              borderSpacing: 0,
-              overflow: "hidden",
+              height: "3px",
+              background:
+                "linear-gradient(90deg, var(--cyan), var(--violet), var(--amber))",
             }}
-          >
-            <thead>
-              <tr>
-                {["Capability", "Inventra", "TradeGecko", "Cin7", "Spreadsheets"].map(
-                  (h, i) => (
+          />
+
+          <div className="comp-table-wrap" style={{ border: "none", borderRadius: 0 }}>
+            <table
+              style={{
+                width: "100%",
+                borderCollapse: "separate",
+                borderSpacing: 0,
+                overflow: "hidden",
+              }}
+            >
+              <thead>
+                <tr>
+                  {[
+                    "Capability",
+                    "Inventra",
+                    "TradeGecko",
+                    "Cin7",
+                    "Spreadsheets",
+                  ].map((h, i) => (
                     <th
                       key={h}
                       style={{
                         padding: "20px 24px",
                         background:
                           i === 1
-                            ? "rgba(0,229,255,0.08)"
-                            : "rgba(255,255,255,0.03)",
-                        fontFamily: "var(--font-syne), Syne, sans-serif",
+                            ? "rgba(0,229,255,0.07)"
+                            : "transparent",
+                        fontFamily:
+                          "var(--font-syne), Syne, sans-serif",
                         fontWeight: 700,
-                        fontSize: "0.88rem",
+                        fontSize: "0.86rem",
                         borderBottom: "1px solid var(--border)",
                         textAlign: i === 0 ? "left" : "center",
-                        color: i === 1 ? "var(--cyan)" : "var(--text)",
-                        borderLeft: i === 1 ? "1px solid rgba(0,229,255,0.18)" : "none",
-                        borderRight: i === 1 ? "1px solid rgba(0,229,255,0.18)" : "none",
+                        color:
+                          i === 1 ? "var(--cyan)" : "var(--text)",
+                        borderLeft:
+                          i === 1
+                            ? "1px solid rgba(0,229,255,0.15)"
+                            : "none",
+                        borderRight:
+                          i === 1
+                            ? "1px solid rgba(0,229,255,0.15)"
+                            : "none",
                       }}
                     >
-                      {h}
+                      {i === 1 ? (
+                        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
+                          {h}
+                          <span
+                            style={{
+                              background: "rgba(0,229,255,0.15)",
+                              color: "var(--cyan)",
+                              fontFamily:
+                                "var(--font-space-mono), Space Mono, monospace",
+                              fontSize: "0.5rem",
+                              padding: "2px 6px",
+                              borderRadius: "4px",
+                              letterSpacing: "0.1em",
+                            }}
+                          >
+                            YOU
+                          </span>
+                        </span>
+                      ) : (
+                        h
+                      )}
                     </th>
-                  )
-                )}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, ri) => (
-                <tr key={row.feature}>
-                  {[row.feature, row.inventra, row.gecko, row.cin7, row.sheets].map(
-                    (val, ci) => (
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, ri) => (
+                  <tr
+                    key={row.feature}
+                    style={{
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background =
+                        "var(--surface2)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background =
+                        "transparent";
+                    }}
+                  >
+                    {[
+                      row.feature,
+                      row.inventra,
+                      row.gecko,
+                      row.cin7,
+                      row.sheets,
+                    ].map((val, ci) => (
                       <td
                         key={ci}
                         style={{
-                          padding: "15px 24px",
-                          borderBottom: ri < rows.length - 1 ? "1px solid var(--border)" : "none",
-                          fontSize: ci === 1 ? "0.82rem" : "0.86rem",
+                          padding: "14px 24px",
+                          borderBottom:
+                            ri < rows.length - 1
+                              ? "1px solid var(--border)"
+                              : "none",
+                          fontSize: "0.86rem",
                           textAlign: ci === 0 ? "left" : "center",
                           color:
                             ci === 0
                               ? "var(--text)"
                               : ci === 1
                               ? cellColor(val)
-                              : cellColor(val) === "var(--muted)"
-                              ? "var(--muted)"
                               : cellColor(val),
                           fontWeight: ci === 0 ? 500 : ci === 1 ? 600 : 400,
                           background:
-                            ci === 1 ? "rgba(0,229,255,0.04)" : "transparent",
+                            ci === 1
+                              ? "rgba(0,229,255,0.03)"
+                              : "transparent",
                           borderLeft:
-                            ci === 1 ? "1px solid rgba(0,229,255,0.08)" : "none",
+                            ci === 1
+                              ? "1px solid rgba(0,229,255,0.07)"
+                              : "none",
                           borderRight:
-                            ci === 1 ? "1px solid rgba(0,229,255,0.08)" : "none",
+                            ci === 1
+                              ? "1px solid rgba(0,229,255,0.07)"
+                              : "none",
                         }}
                       >
                         {val}
                       </td>
-                    )
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </motion.div>
     </section>

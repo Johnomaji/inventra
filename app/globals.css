@@ -314,9 +314,9 @@ body::before {
 }
 
 /* Steps track */
-.steps-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+.steps-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; position: relative; }
 @media (max-width: 768px) {
-  .steps-track { grid-template-columns: 1fr; gap: 32px; }
+  .steps-track { grid-template-columns: 1fr; gap: 20px; }
   .steps-line { display: none; }
 }
 
@@ -328,4 +328,243 @@ body::before {
 .nav-hamburger { display: none; }
 @media (max-width: 768px) {
   .nav-hamburger { display: flex; }
+}
+
+/* ============================================
+   Hero split layout
+   ============================================ */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1120px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 960px) {
+  .hero-split { grid-template-columns: 1fr; gap: 56px; }
+}
+
+/* Section split header: heading left, body right */
+.section-header-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 60px;
+}
+@media (max-width: 768px) {
+  .section-header-split { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+}
+
+/* Hero metrics 2×2 grid */
+.hero-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+
+/* Card with elevation shadow */
+.card-elevated {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+}
+.light .card-elevated {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.09), 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Featured card (dark filled) */
+.card-featured-violet {
+  background: var(--violet) !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 40px rgba(124,77,255,0.28);
+  color: #fff !important;
+}
+.card-featured-cyan {
+  background: var(--cyan) !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 40px rgba(0,229,255,0.2);
+  color: var(--bg) !important;
+}
+
+/* Footer grid responsive */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* Pricing card top accent (always visible on featured) */
+.pricing-featured-accent {
+  position: relative;
+  overflow: hidden;
+}
+.pricing-featured-accent::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--violet));
+  border-radius: 12px 12px 0 0;
+}
+
+/* ============================================
+   Bento grid layouts — responsive
+   ============================================ */
+
+/* Problem section bento */
+@media (max-width: 900px) {
+  #problem > div > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+  #problem > div > div:nth-child(2) > div:nth-child(2) {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 600px) {
+  #problem > div > div:nth-child(2) > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Shift section bento */
+@media (max-width: 900px) {
+  #shift > div > div:last-child {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  #shift > div > div:last-child > div:first-child {
+    grid-row: auto !important;
+  }
+}
+
+/* AI engine layout */
+@media (max-width: 900px) {
+  #ai-engine > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+  #ai-engine > div > div:last-child > div:last-child {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 600px) {
+  #ai-engine > div > div:last-child > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* VR dashboard layout */
+@media (max-width: 900px) {
+  #vr-dashboard > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Social proof bento */
+@media (max-width: 900px) {
+  #social-proof > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Use cases bento */
+@media (max-width: 900px) {
+  #use-cases > div > div:last-child {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  #use-cases > div > div:last-child > div:first-child {
+    grid-column: 1 / -1 !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (max-width: 600px) {
+  #use-cases > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Product section caps grid */
+@media (max-width: 900px) {
+  #product > div > div:nth-child(2) {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  #product > div > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* AR features grid */
+@media (max-width: 900px) {
+  #ar-experience > div > div:last-child {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 480px) {
+  #ar-experience > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* AR viewport aspect ratio */
+@media (max-width: 640px) {
+  #ar-experience > div > div:nth-child(3) {
+    aspect-ratio: 4/3 !important;
+  }
+}
+
+/* How it works — responsive step rows */
+@media (max-width: 768px) {
+  #how > div > div:last-child > div {
+    grid-template-columns: 64px 1fr !important;
+    grid-template-rows: auto auto !important;
+    padding: 28px 24px !important;
+  }
+  #how > div > div:last-child > div > div:nth-child(3) {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+/* Problem + product section header grids */
+@media (max-width: 768px) {
+  #problem > div > div:first-child > div:nth-child(2),
+  #product > div > div:first-child,
+  #competitive > div > div:first-child > div,
+  #use-cases > div > div:first-child,
+  #ai-engine > div > div:first-child > div,
+  #vr-dashboard > div > div,
+  .section-header-split {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Pricing grid */
+@media (max-width: 900px) {
+  #pricing > div > div:last-child {
+    grid-template-columns: 1fr !important;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+}
+
+/* Footer grid */
+@media (max-width: 900px) {
+  footer > div > div:first-child {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 540px) {
+  footer > div > div:first-child {
+    grid-template-columns: 1fr !important;
+  }
 }

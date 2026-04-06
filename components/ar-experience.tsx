@@ -3,256 +3,410 @@
 import { motion } from "framer-motion";
 
 const features = [
-  { icon: "📱", title: "Works on any smartphone", desc: "No expensive AR headsets. Just the phone in your pocket." },
-  { icon: "⚡", title: "Audit a shelf in 3 seconds", desc: "AI-powered object recognition handles identification automatically." },
-  { icon: "🔴", title: "Live alerts overlaid in-view", desc: "See exactly which items need restocking as you walk the floor." },
-  { icon: "🌐", title: "Offline-capable", desc: "Core AR features work without internet — syncs when reconnected." },
+  {
+    icon: "📱",
+    title: "Works on any smartphone",
+    desc: "No expensive AR headsets. Just the phone in your pocket.",
+  },
+  {
+    icon: "⚡",
+    title: "Audit a shelf in 3 seconds",
+    desc: "AI-powered object recognition handles identification automatically.",
+  },
+  {
+    icon: "🔴",
+    title: "Live alerts overlaid in-view",
+    desc: "See exactly which items need restocking as you walk the floor.",
+  },
+  {
+    icon: "🌐",
+    title: "Offline-capable",
+    desc: "Core AR features work without internet — syncs when reconnected.",
+  },
 ];
 
-const featureItemVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 0) => ({
     opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay: i * 0.08,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
 };
 
 export function ArExperience() {
   return (
     <section
       id="ar-experience"
-      style={{ padding: "120px 24px", position: "relative", overflow: "hidden" }}
+      style={{
+        padding: "120px 24px",
+        background: "var(--bg2)",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(135deg, rgba(0,229,255,0.02), transparent 50%, rgba(255,179,0,0.02))",
+          background:
+            "linear-gradient(135deg, rgba(255,179,0,0.02), transparent 50%)",
+          pointerEvents: "none",
         }}
       />
+
       <div
         style={{
           maxWidth: "1120px",
           margin: "0 auto",
-          alignItems: "center",
+          position: "relative",
+          zIndex: 1,
         }}
-        className="grid-2col"
       >
-        {/* AR Visual */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 80, damping: 20 }}
-          style={{ position: "relative", aspectRatio: "1", maxWidth: "420px" }}
+          transition={{ duration: 0.7 }}
+          style={{ marginBottom: "52px", textAlign: "center" }}
         >
           <div
             style={{
-              width: "100%",
-              height: "100%",
-              background: "rgba(255,179,0,0.03)",
-              border: "1px solid rgba(255,179,0,0.15)",
-              borderRadius: "12px",
-              overflow: "hidden",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(255,179,0,0.08)",
+              border: "1px solid rgba(255,179,0,0.2)",
+              color: "var(--amber)",
+              fontFamily: "var(--font-space-mono), Space Mono, monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              padding: "7px 18px",
+              borderRadius: "100px",
+              marginBottom: "20px",
+            }}
+          >
+            ◎ Inventra AR
+          </div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              marginBottom: "16px",
+              lineHeight: 1.1,
+            }}
+          >
+            See Your Inventory
+            <br />
+            in{" "}
+            <em style={{ fontStyle: "normal", color: "var(--amber)" }}>
+              Real Space
+            </em>
+          </h2>
+          <p
+            style={{
+              color: "var(--muted)",
+              fontWeight: 300,
+              lineHeight: 1.8,
+              maxWidth: "600px",
+              margin: "0 auto",
+              fontSize: "1rem",
+            }}
+          >
+            Open the Inventra AR mode on any smartphone. Point at a shelf.
+            Watch live data materialize over every product — quantities, reorder
+            urgency, price data, and AI alerts. No barcodes required. No wands.
+            No dedicated hardware.
+          </p>
+        </motion.div>
+
+        {/* AR Viewport — full width showcase */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{
+            duration: 0.9,
+            type: "spring",
+            stiffness: 70,
+            damping: 18,
+          }}
+          style={{
+            width: "100%",
+            aspectRatio: "21/9",
+            background: "rgba(255,179,0,0.03)",
+            border: "1px solid rgba(255,179,0,0.2)",
+            borderRadius: "20px",
+            boxShadow: "0 12px 60px rgba(255,179,0,0.08)",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            marginBottom: "24px",
+          }}
+        >
+          {/* Scan line */}
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              height: "2px",
+              background:
+                "linear-gradient(90deg, transparent, var(--amber), transparent)",
+              animation: "scanLine 3s ease-in-out infinite",
+              boxShadow: "0 0 12px var(--amber)",
+            }}
+          />
+
+          {/* Corner brackets — all 4 */}
+          {[
+            { top: "16px", left: "16px" },
+            { top: "16px", right: "16px", transform: "scaleX(-1)" },
+            { bottom: "16px", left: "16px", transform: "scaleY(-1)" },
+            { bottom: "16px", right: "16px", transform: "scale(-1)" },
+          ].map((pos, i) => (
+            <div
+              key={i}
+              style={{
+                position: "absolute",
+                ...pos,
+                width: "24px",
+                height: "24px",
+                borderTop: "2px solid rgba(255,179,0,0.6)",
+                borderLeft: "2px solid rgba(255,179,0,0.6)",
+                borderRadius: "2px 0 0 0",
+              }}
+            />
+          ))}
+
+          {/* Header bar */}
+          <div
+            style={{
+              position: "absolute",
+              top: "16px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "rgba(255,179,0,0.1)",
+              border: "1px solid rgba(255,179,0,0.3)",
+              color: "var(--amber)",
+              fontFamily: "var(--font-space-mono), Space Mono, monospace",
+              fontSize: "0.6rem",
+              padding: "5px 14px",
+              borderRadius: "100px",
+              letterSpacing: "0.1em",
+            }}
+          >
+            ◈ AR SCAN MODE — FLOOR 3 · WAREHOUSE A
+          </div>
+
+          {/* Floating AR elements */}
+          <div
+            style={{
+              position: "relative",
+              width: "80%",
+              height: "70%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              position: "relative",
+              gap: "60px",
             }}
           >
-            {/* Scanline */}
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                height: "2px",
-                background: "linear-gradient(90deg, transparent, var(--amber), transparent)",
-                animation: "scanLine 3s ease-in-out infinite",
-                boxShadow: "0 0 10px var(--amber)",
-              }}
-            />
-            {/* Corner decorations */}
+            {/* Shelf rack representation */}
             {[
-              { top: "14px", left: "14px" },
-              { bottom: "14px", right: "14px" },
-            ].map((pos, i) => (
-              <div key={i} style={{ position: "absolute", ...pos }}>
+              {
+                sku: "SKU-4421",
+                units: "47 units",
+                status: "OK",
+                color: "rgba(0,200,83,0.8)",
+                x: "-120px",
+                delay: "0s",
+              },
+              {
+                sku: "SKU-1189",
+                units: "LOW STOCK",
+                status: "⚠",
+                color: "rgba(255,179,0,0.9)",
+                x: "0px",
+                delay: "1s",
+              },
+              {
+                sku: "SKU-7723",
+                units: "91 units",
+                status: "OK",
+                color: "rgba(0,200,83,0.8)",
+                x: "120px",
+                delay: "2s",
+              },
+            ].map((item) => (
+              <div
+                key={item.sku}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "10px",
+                  animation: `arFloat 4s ease-in-out ${item.delay} infinite`,
+                }}
+              >
+                {/* Bounding box */}
                 <div
                   style={{
-                    width: "20px",
-                    height: "2px",
-                    background: "var(--amber)",
-                    opacity: 0.5,
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
+                    width: "80px",
+                    height: "96px",
+                    background: "rgba(255,179,0,0.04)",
+                    border: "1px solid rgba(255,179,0,0.35)",
+                    borderRadius: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "1.6rem",
+                    opacity: 0.7,
                   }}
-                />
+                >
+                  📦
+                </div>
+                {/* Label */}
                 <div
                   style={{
-                    width: "2px",
-                    height: "20px",
-                    background: "var(--amber)",
-                    opacity: 0.5,
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
+                    background: "rgba(5,8,16,0.85)",
+                    border: `1px solid ${item.color}`,
+                    color: item.color,
+                    fontFamily:
+                      "var(--font-space-mono), Space Mono, monospace",
+                    fontSize: "0.56rem",
+                    padding: "4px 10px",
+                    borderRadius: "4px",
+                    textAlign: "center",
+                    lineHeight: 1.4,
+                    whiteSpace: "nowrap",
+                    backdropFilter: "blur(4px)",
                   }}
-                />
+                >
+                  {item.sku}
+                  <br />
+                  {item.units} {item.status}
+                </div>
               </div>
             ))}
+          </div>
 
-            {/* AR boxes */}
-            <div style={{ position: "relative", width: "200px", height: "200px" }}>
-              {[
-                { style: { width: "80px", height: "50px", top: "30%", left: "15%", animation: "arFloat 4s ease-in-out infinite" } },
-                { style: { width: "60px", height: "60px", top: "50%", right: "20%", animation: "arFloat 4s ease-in-out 1s infinite" } },
-                { style: { width: "100px", height: "40px", bottom: "30%", left: "30%", animation: "arFloat 4s ease-in-out 2s infinite" } },
-              ].map((box, i) => (
+          {/* Bottom status bar */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "16px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              gap: "16px",
+            }}
+          >
+            {[
+              { dot: "#00c853", label: "2 OK" },
+              { dot: "#ffb300", label: "1 LOW" },
+              { dot: "#ff5252", label: "0 CRITICAL" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  fontFamily:
+                    "var(--font-space-mono), Space Mono, monospace",
+                  fontSize: "0.55rem",
+                  color: s.dot,
+                  background: "rgba(5,8,16,0.75)",
+                  border: `1px solid ${s.dot}33`,
+                  padding: "4px 10px",
+                  borderRadius: "100px",
+                  backdropFilter: "blur(4px)",
+                }}
+              >
                 <div
-                  key={i}
                   style={{
-                    position: "absolute",
-                    background: "rgba(255,179,0,0.07)",
-                    border: "1px solid rgba(255,179,0,0.3)",
-                    borderRadius: "4px",
-                    ...box.style,
+                    width: "5px",
+                    height: "5px",
+                    borderRadius: "50%",
+                    background: s.dot,
                   }}
                 />
-              ))}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "20%",
-                  right: "8%",
-                  background: "rgba(255,179,0,0.15)",
-                  border: "1px solid rgba(255,179,0,0.3)",
-                  color: "var(--amber)",
-                  fontFamily: "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.58rem",
-                  padding: "4px 8px",
-                  borderRadius: "2px",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                SKU-4421 · 47 units ✓
+                {s.label}
               </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: "22%",
-                  left: "8%",
-                  background: "rgba(255,179,0,0.15)",
-                  border: "1px solid rgba(255,179,0,0.3)",
-                  color: "var(--amber)",
-                  fontFamily: "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.58rem",
-                  padding: "4px 8px",
-                  borderRadius: "2px",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                SKU-1189 · LOW STOCK ⚠
-              </div>
-            </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* Copy */}
-        <div>
-          <motion.div
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.08 } },
-            }}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-          >
-            <motion.div variants={featureItemVariants}>
+        {/* Feature cards — horizontal 4-col */}
+        <motion.div
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.08 } },
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "12px",
+          }}
+        >
+          {features.map((feat, i) => (
+            <motion.div
+              key={feat.title}
+              custom={i}
+              variants={fadeUp}
+              whileHover={{
+                borderColor: "rgba(255,179,0,0.3)",
+                background: "rgba(255,179,0,0.04)",
+                y: -2,
+                transition: { duration: 0.2 },
+              }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                padding: "20px 18px",
+                background: "rgba(255,179,0,0.02)",
+                border: "1px solid rgba(255,179,0,0.1)",
+                borderRadius: "14px",
+                cursor: "default",
+                transition: "all 0.3s",
+              }}
+            >
+              <div style={{ fontSize: "1.2rem" }}>{feat.icon}</div>
               <div
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(255,179,0,0.08)",
-                  border: "1px solid rgba(255,179,0,0.2)",
-                  color: "var(--amber)",
-                  fontFamily: "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.7rem",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  padding: "7px 16px",
-                  borderRadius: "2px",
-                  marginBottom: "24px",
+                  fontFamily: "var(--font-syne), Syne, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "0.86rem",
+                  color: "var(--text)",
                 }}
               >
-                ◎ Inventra AR
+                {feat.title}
               </div>
-              <h2
+              <div
                 style={{
-                  fontSize: "clamp(2rem, 4vw, 3.4rem)",
-                  fontWeight: 800,
-                  letterSpacing: "-0.02em",
-                  marginBottom: "18px",
+                  fontSize: "0.78rem",
+                  color: "var(--muted)",
+                  lineHeight: 1.65,
                 }}
               >
-                See Your Inventory
-                <br />
-                in{" "}
-                <em style={{ fontStyle: "normal", color: "var(--amber)" }}>
-                  Real Space
-                </em>
-              </h2>
-              <p style={{ color: "var(--muted)", fontWeight: 300, marginBottom: "32px", lineHeight: 1.8 }}>
-                Open the Inventra AR mode on any smartphone. Point at a shelf. Watch
-                live data materialize over every product — quantities, reorder urgency,
-                price data, and AI alerts. No barcodes required. No wands. No dedicated
-                hardware.
-              </p>
+                {feat.desc}
+              </div>
             </motion.div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {features.map((feat) => (
-                <motion.div
-                  key={feat.title}
-                  variants={featureItemVariants}
-                  whileHover={{ background: "rgba(255,179,0,0.07)", borderColor: "rgba(255,179,0,0.28)" }}
-                  style={{
-                    display: "flex",
-                    gap: "14px",
-                    alignItems: "center",
-                    padding: "14px 18px",
-                    background: "rgba(255,179,0,0.03)",
-                    border: "1px solid rgba(255,179,0,0.1)",
-                    borderRadius: "8px",
-                    transition: "all 0.3s",
-                  }}
-                >
-                  <div style={{ fontSize: "1.15rem", flexShrink: 0 }}>{feat.icon}</div>
-                  <div>
-                    <strong
-                      style={{
-                        color: "var(--text)",
-                        fontWeight: 600,
-                        display: "block",
-                        marginBottom: "2px",
-                        fontSize: "0.88rem",
-                      }}
-                    >
-                      {feat.title}
-                    </strong>
-                    <span style={{ fontSize: "0.8rem", color: "var(--muted)" }}>
-                      {feat.desc}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

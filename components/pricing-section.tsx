@@ -22,6 +22,9 @@ const plans = [
     cta: "Start Free →",
     ctaStyle: "outline",
     featured: false,
+    accentColor: "var(--cyan)",
+    accentBg: "rgba(0,229,255,0.06)",
+    accentBorder: "rgba(0,229,255,0.15)",
   },
   {
     tier: "Growth",
@@ -41,6 +44,9 @@ const plans = [
     cta: "Get Early Access →",
     ctaStyle: "filled",
     featured: true,
+    accentColor: "var(--cyan)",
+    accentBg: "rgba(0,229,255,0.06)",
+    accentBorder: "rgba(0,229,255,0.15)",
   },
   {
     tier: "Enterprise",
@@ -60,66 +66,104 @@ const plans = [
     cta: "Talk to Sales →",
     ctaStyle: "outline",
     featured: false,
+    accentColor: "#a67cff",
+    accentBg: "rgba(124,77,255,0.06)",
+    accentBorder: "rgba(124,77,255,0.15)",
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.97 },
-  visible: {
+const fadeUp = {
+  hidden: { opacity: 0, y: 28, scale: 0.97 },
+  visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
+    transition: {
+      duration: 0.6,
+      delay: i * 0.12,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }),
 };
 
 export function PricingSection() {
   return (
-    <section id="pricing" style={{ padding: "120px 24px", background: "var(--bg2)" }}>
+    <section
+      id="pricing"
+      style={{ padding: "120px 24px", background: "var(--bg)", overflow: "hidden" }}
+    >
+      {/* Background glow */}
+      <div
+        style={{
+          position: "absolute",
+          width: "800px",
+          height: "600px",
+          background:
+            "radial-gradient(ellipse, rgba(0,229,255,0.05) 0%, rgba(124,77,255,0.03) 50%, transparent 70%)",
+          top: "30%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          pointerEvents: "none",
+        }}
+      />
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7 }}
-        style={{ maxWidth: "1120px", margin: "0 auto", textAlign: "center" }}
+        style={{ maxWidth: "1120px", margin: "0 auto", position: "relative", zIndex: 1 }}
       >
-        <div
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            background: "rgba(0,229,255,0.08)",
-            border: "1px solid rgba(0,229,255,0.2)",
-            color: "var(--cyan)",
-            fontFamily: "var(--font-space-mono), Space Mono, monospace",
-            fontSize: "0.7rem",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            padding: "7px 16px",
-            borderRadius: "2px",
-            marginBottom: "16px",
-          }}
-        >
-          ◎ Simple Pricing
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "72px" }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(0,229,255,0.08)",
+              border: "1px solid rgba(0,229,255,0.2)",
+              color: "var(--cyan)",
+              fontFamily: "var(--font-space-mono), Space Mono, monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              padding: "7px 18px",
+              borderRadius: "100px",
+              marginBottom: "20px",
+            }}
+          >
+            ◎ Simple Pricing
+          </div>
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 4vw, 3.4rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+              marginBottom: "16px",
+            }}
+          >
+            Start Free.{" "}
+            <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
+              Scale Fast.
+            </em>
+          </h2>
+          <p
+            style={{
+              color: "var(--muted)",
+              fontWeight: 300,
+              fontSize: "1rem",
+              maxWidth: "480px",
+              margin: "0 auto",
+            }}
+          >
+            No hidden fees. No complex tiers. Pricing built for African business
+            realities.
+          </p>
         </div>
-        <h2
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3.4rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.02em",
-            marginBottom: "16px",
-          }}
-        >
-          Start Free. Scale Fast.
-        </h2>
-        <p style={{ color: "var(--muted)", marginBottom: "60px", fontWeight: 300 }}>
-          No hidden fees. No complex tiers. Pricing built for African business
-          realities.
-        </p>
 
+        {/* Pricing grid */}
         <motion.div
-          className="grid-pricing"
-          style={{ textAlign: "left" }}
           variants={{
             hidden: {},
             visible: { transition: { staggerChildren: 0.12 } },
@@ -127,147 +171,197 @@ export function PricingSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "16px",
+            alignItems: "start",
+          }}
         >
-          {plans.map((plan) => (
+          {plans.map((plan, i) => (
             <motion.div
               key={plan.tier}
-              variants={cardVariants}
+              custom={i}
+              variants={fadeUp}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
               style={{
                 background: plan.featured ? "var(--surface2)" : "var(--surface)",
                 border: plan.featured
                   ? "1px solid var(--border-strong)"
                   : "1px solid var(--border)",
-                borderRadius: "12px",
-                padding: "36px 28px",
+                borderRadius: "20px",
+                padding: "0",
                 transition: "all 0.3s",
                 position: "relative",
                 overflow: "hidden",
-                boxShadow: plan.featured ? "var(--glow-cyan)" : "none",
+                boxShadow: plan.featured
+                  ? "0 16px 60px rgba(0,229,255,0.1), 0 4px 16px rgba(0,0,0,0.1)"
+                  : "0 4px 20px rgba(0,0,0,0.04)",
               }}
             >
-              {plan.featured && (
+              {/* Top gradient accent */}
+              <div
+                style={{
+                  height: plan.featured ? "3px" : "2px",
+                  background: plan.featured
+                    ? "linear-gradient(90deg, var(--cyan), var(--violet))"
+                    : `linear-gradient(90deg, ${plan.accentColor}, transparent)`,
+                  borderRadius: "20px 20px 0 0",
+                }}
+              />
+
+              <div style={{ padding: "32px 28px" }}>
+                {/* Tier header */}
                 <div
                   style={{
-                    position: "absolute",
-                    top: "16px",
-                    right: "16px",
-                    background: "var(--cyan)",
-                    color: "var(--bg)",
-                    fontFamily: "var(--font-space-mono), Space Mono, monospace",
-                    fontSize: "0.58rem",
-                    fontWeight: 700,
-                    padding: "5px 10px",
-                    borderRadius: "2px",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "space-between",
+                    marginBottom: "20px",
                   }}
                 >
-                  MOST POPULAR
-                </div>
-              )}
-              <div
-                style={{
-                  fontFamily: "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.68rem",
-                  color: "var(--muted)",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  marginBottom: "12px",
-                }}
-              >
-                {plan.tier}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-syne), Syne, sans-serif",
-                  fontWeight: 800,
-                  fontSize: plan.price === "Custom" ? "2rem" : "2.8rem",
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1,
-                  marginBottom: "4px",
-                }}
-              >
-                {plan.price}
-                {plan.period && (
-                  <span
+                  <div
                     style={{
-                      fontSize: "0.95rem",
-                      color: "var(--muted)",
-                      fontWeight: 400,
+                      fontFamily:
+                        "var(--font-space-mono), Space Mono, monospace",
+                      fontSize: "0.65rem",
+                      color: plan.featured ? "var(--cyan)" : "var(--muted)",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
                     }}
                   >
-                    {plan.period}
-                  </span>
-                )}
-              </div>
-              <p
-                style={{
-                  fontSize: "0.84rem",
-                  color: "var(--muted)",
-                  marginTop: "8px",
-                  marginBottom: "24px",
-                  paddingBottom: "24px",
-                  borderBottom: "1px solid var(--border)",
-                }}
-              >
-                {plan.desc}
-              </p>
-              <ul
-                style={{
-                  listStyle: "none",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "11px",
-                  marginBottom: "28px",
-                  padding: 0,
-                }}
-              >
-                {plan.features.map((f) => (
-                  <li
-                    key={f.text}
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "center",
-                      fontSize: "0.86rem",
-                      color: f.included ? "var(--text)" : "var(--muted)",
-                    }}
-                  >
-                    <span
+                    {plan.tier}
+                  </div>
+                  {plan.featured && (
+                    <div
                       style={{
-                        color: f.included ? "var(--cyan)" : "var(--muted)",
+                        background: "var(--cyan)",
+                        color: "var(--bg)",
+                        fontFamily:
+                          "var(--font-space-mono), Space Mono, monospace",
+                        fontSize: "0.52rem",
                         fontWeight: 700,
+                        padding: "4px 10px",
+                        borderRadius: "100px",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
                         flexShrink: 0,
                       }}
                     >
-                      {f.included ? "✓" : "—"}
-                    </span>
-                    {f.text}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/early-access"
-                style={{
-                  display: "block",
-                  textAlign: "center",
-                  padding: "14px",
-                  fontFamily: "var(--font-syne), Syne, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "0.9rem",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  transition: "all 0.25s",
-                  background: plan.ctaStyle === "filled" ? "var(--cyan)" : "transparent",
-                  color: plan.ctaStyle === "filled" ? "var(--bg)" : "var(--text)",
-                  border:
-                    plan.ctaStyle === "outline" ? "1px solid var(--border)" : "none",
-                }}
-              >
-                {plan.cta}
-              </Link>
+                      MOST POPULAR
+                    </div>
+                  )}
+                </div>
+
+                {/* Price */}
+                <div style={{ marginBottom: "20px" }}>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-syne), Syne, sans-serif",
+                      fontWeight: 800,
+                      fontSize: plan.price === "Custom" ? "2.2rem" : "3rem",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1,
+                      marginBottom: "4px",
+                    }}
+                  >
+                    {plan.price}
+                    {plan.period && (
+                      <span
+                        style={{
+                          fontSize: "0.9rem",
+                          color: "var(--muted)",
+                          fontWeight: 400,
+                          letterSpacing: "0",
+                        }}
+                      >
+                        {plan.period}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p
+                  style={{
+                    fontSize: "0.82rem",
+                    color: "var(--muted)",
+                    paddingBottom: "20px",
+                    borderBottom: "1px solid var(--border)",
+                    marginBottom: "20px",
+                    lineHeight: 1.65,
+                  }}
+                >
+                  {plan.desc}
+                </p>
+
+                {/* Features list */}
+                <ul
+                  style={{
+                    listStyle: "none",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    marginBottom: "28px",
+                    padding: 0,
+                  }}
+                >
+                  {plan.features.map((f) => (
+                    <li
+                      key={f.text}
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                        fontSize: "0.84rem",
+                        color: f.included ? "var(--text)" : "var(--muted)",
+                        opacity: f.included ? 1 : 0.6,
+                      }}
+                    >
+                      <span
+                        style={{
+                          color: f.included
+                            ? plan.featured
+                              ? "var(--cyan)"
+                              : plan.accentColor
+                            : "var(--muted)",
+                          fontWeight: 700,
+                          flexShrink: 0,
+                          fontSize: "0.78rem",
+                        }}
+                      >
+                        {f.included ? "✓" : "—"}
+                      </span>
+                      {f.text}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <Link
+                  href="/early-access"
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    padding: "14px",
+                    fontFamily: "var(--font-syne), Syne, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "0.9rem",
+                    borderRadius: "10px",
+                    textDecoration: "none",
+                    transition: "all 0.25s",
+                    background:
+                      plan.ctaStyle === "filled" ? "var(--cyan)" : "transparent",
+                    color:
+                      plan.ctaStyle === "filled" ? "var(--bg)" : "var(--text)",
+                    border:
+                      plan.ctaStyle === "outline"
+                        ? "1px solid var(--border-strong)"
+                        : "none",
+                  }}
+                >
+                  {plan.cta}
+                </Link>
+              </div>
             </motion.div>
           ))}
         </motion.div>
