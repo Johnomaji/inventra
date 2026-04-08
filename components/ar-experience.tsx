@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const features = [
   {
@@ -103,11 +104,11 @@ export function ArExperience() {
               lineHeight: 1.1,
             }}
           >
-            See Your Inventory
+            <DecryptedText text="See Your Inventory" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            in{" "}
+            <DecryptedText text="in " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <em style={{ fontStyle: "normal", color: "var(--amber)" }}>
-              Real Space
+              <DecryptedText text="Real Space" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </h2>
           <p

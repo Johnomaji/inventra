@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const caps = [
   {
@@ -164,11 +165,11 @@ export function ProductSection() {
                 lineHeight: 1.1,
               }}
             >
-              The{" "}
+              <DecryptedText text="The " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
-                Intelligent OS
+                <DecryptedText text="Intelligent OS" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               </em>{" "}
-              for Commerce in Africa
+              <DecryptedText text="for Commerce in Africa" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </h2>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px", justifyContent: "flex-end" }}>

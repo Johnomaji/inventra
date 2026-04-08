@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const sigs = [
   "Free to start",
@@ -138,10 +139,12 @@ export function FinalCtaSection() {
               marginBottom: "24px",
             }}
           >
-            The Future of African
+            <DecryptedText text="The Future of African" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            Commerce Starts{" "}
-            <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>Now.</em>
+            <DecryptedText text="Commerce Starts " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
+              <DecryptedText text="Now." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            </em>
           </motion.h2>
 
           {/* Body */}

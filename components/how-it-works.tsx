@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const steps = [
   {
@@ -34,7 +35,7 @@ export function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: "140px 24px",
+        padding: "clamp(64px, 10vw, 140px) 24px",
         background: "var(--bg2)",
         overflow: "hidden",
         position: "relative",
@@ -52,7 +53,7 @@ export function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
-          style={{ marginBottom: "80px" }}
+          style={{ marginBottom: "clamp(40px, 7vw, 80px)" }}
         >
           <div
             style={{
@@ -92,9 +93,9 @@ export function HowItWorks() {
                   lineHeight: 1.05,
                 }}
               >
-                Live in{" "}
+                <DecryptedText text="Live in " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
                 <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
-                  3 Steps.
+                  <DecryptedText text="3 Steps." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
                 </em>
               </h2>
             </div>
@@ -244,17 +245,7 @@ export function HowItWorks() {
         </div>
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .how-step-row {
-            grid-template-columns: 60px 1fr !important;
-            grid-template-rows: auto auto;
-          }
-          .how-step-row > *:nth-child(3) {
-            grid-column: 1 / -1;
-          }
-        }
-      `}</style>
+
     </section>
   );
 }

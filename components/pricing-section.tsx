@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const plans = [
   {
@@ -143,9 +144,9 @@ export function PricingSection() {
               marginBottom: "16px",
             }}
           >
-            Start Free.{" "}
+            <DecryptedText text="Start Free. " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
-              Scale Fast.
+              <DecryptedText text="Scale Fast." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </h2>
           <p

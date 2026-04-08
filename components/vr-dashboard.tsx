@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const features = [
   {
@@ -103,10 +104,12 @@ export function VrDashboard() {
               marginBottom: "16px",
             }}
           >
-            Manage Every Location
+            <DecryptedText text="Manage Every Location" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            from{" "}
-            <em style={{ fontStyle: "normal", color: "#a67cff" }}>Anywhere</em>
+            <DecryptedText text="from " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <em style={{ fontStyle: "normal", color: "#a67cff" }}>
+              <DecryptedText text="Anywhere" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            </em>
           </h2>
           <p
             style={{

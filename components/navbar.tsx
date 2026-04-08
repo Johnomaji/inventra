@@ -2,21 +2,24 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
-  { label: "Features", href: "/#product" },
+  { label: "Features", href: "/features" },
   { label: "How It Works", href: "/#how" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Use Cases", href: "/#use-cases" },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +32,32 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastY]);
 
+  // Scroll lock when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  // Active section tracking via intersection observer
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href.replace("/#", ""));
+    const observers = ids.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, []);
+
   return (
     <>
       <nav
+        className="px-4 md:px-10"
         style={{
           transform: visible ? "translateY(0)" : "translateY(-100%)",
           transition: "transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s",
@@ -39,8 +65,8 @@ export function Navbar() {
           top: 0,
           left: 0,
           right: 0,
+          width: "100%",
           zIndex: 100,
-          padding: "0 40px",
           height: "64px",
           display: "flex",
           alignItems: "center",
@@ -48,6 +74,7 @@ export function Navbar() {
           background: scrolled ? "var(--nav-bg)" : "transparent",
           backdropFilter: scrolled ? "blur(24px)" : "none",
           boxShadow: scrolled ? "0 1px 0 var(--border)" : "none",
+          boxSizing: "border-box",
         }}
       >
         {/* Logo */}
@@ -63,6 +90,7 @@ export function Navbar() {
             display: "flex",
             alignItems: "center",
             gap: "2px",
+            flexShrink: 0,
           }}
         >
           <span>Inven</span>
@@ -98,39 +126,48 @@ export function Navbar() {
             padding: "4px",
           }}
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              style={{
-                color: "var(--muted)",
-                textDecoration: "none",
-                fontSize: "0.82rem",
-                fontWeight: 500,
-                padding: "7px 18px",
-                borderRadius: "100px",
-                transition: "all 0.2s",
-                display: "inline-block",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--text)";
-                e.currentTarget.style.background = "var(--surface2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--muted)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.href.startsWith("/#")
+              ? link.href === `/#${activeSection}`
+              : pathname === link.href || pathname.startsWith(link.href + "/");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                style={{
+                  color: isActive ? "var(--text)" : "var(--muted)",
+                  background: isActive ? "var(--surface2)" : "transparent",
+                  textDecoration: "none",
+                  fontSize: "0.82rem",
+                  fontWeight: isActive ? 600 : 500,
+                  padding: "7px 18px",
+                  borderRadius: "100px",
+                  transition: "all 0.2s",
+                  display: "inline-block",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--text)";
+                  e.currentTarget.style.background = "var(--surface2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = isActive ? "var(--text)" : "var(--muted)";
+                  e.currentTarget.style.background = isActive ? "var(--surface2)" : "transparent";
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
-        {/* Right side */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        {/* Right side — shrink:0 so it is never pushed off-screen */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", flexShrink: 0 }}>
           <ThemeToggle />
+
+          {/* CTA — desktop only */}
           <Link
             href="/early-access"
+            className="hidden md:inline-flex"
             style={{
               background: "var(--cyan)",
               color: "var(--bg)",
@@ -140,7 +177,6 @@ export function Navbar() {
               padding: "9px 20px",
               borderRadius: "8px",
               textDecoration: "none",
-              display: "inline-flex",
               alignItems: "center",
               gap: "6px",
               letterSpacing: "0.03em",
@@ -160,19 +196,22 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <button
+            className="flex md:hidden items-center justify-center"
             style={{
-              display: "none",
               background: "transparent",
               border: "none",
               color: "var(--muted)",
               cursor: "pointer",
-              padding: "4px",
+              minWidth: "44px",
+              minHeight: "44px",
+              borderRadius: "8px",
+              padding: 0,
             }}
-            className="md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
@@ -180,48 +219,57 @@ export function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
+          className="mobile-menu-enter"
           style={{
             position: "fixed",
             top: "64px",
             left: 0,
             right: 0,
+            width: "100%",
             zIndex: 99,
             background: "var(--mobile-menu-bg)",
             backdropFilter: "blur(24px)",
             borderBottom: "1px solid var(--border)",
-            padding: "20px 24px",
+            padding: "20px 16px",
             display: "flex",
             flexDirection: "column",
             gap: "4px",
+            boxSizing: "border-box",
           }}
         >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              style={{
-                color: "var(--muted)",
-                textDecoration: "none",
-                fontSize: "1rem",
-                fontWeight: 500,
-                padding: "12px 16px",
-                borderRadius: "10px",
-                transition: "all 0.2s",
-                display: "block",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--text)";
-                e.currentTarget.style.background = "var(--surface)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--muted)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.href.startsWith("/#")
+              ? link.href === `/#${activeSection}`
+              : pathname === link.href || pathname.startsWith(link.href + "/");
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  color: isActive ? "var(--text)" : "var(--muted)",
+                  background: isActive ? "var(--surface)" : "transparent",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                  fontWeight: isActive ? 600 : 500,
+                  padding: "12px 16px",
+                  borderRadius: "10px",
+                  transition: "all 0.2s",
+                  display: "block",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--text)";
+                  e.currentTarget.style.background = "var(--surface)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = isActive ? "var(--text)" : "var(--muted)";
+                  e.currentTarget.style.background = isActive ? "var(--surface)" : "transparent";
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div style={{ paddingTop: "12px", borderTop: "1px solid var(--border)", marginTop: "8px" }}>
             <Link
               href="/early-access"

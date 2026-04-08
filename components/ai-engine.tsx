@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const capabilities = [
   {
@@ -113,11 +114,11 @@ export function AiEngine() {
                 lineHeight: 1.1,
               }}
             >
-              An AI Engine
+              <DecryptedText text="An AI Engine" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               <br />
-              Built for{" "}
+              <DecryptedText text="Built for " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
-                African Commerce
+                <DecryptedText text="African Commerce" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               </em>
             </h2>
             <p

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 import { useEffect, useRef, useState } from "react";
 import {
   AreaChart,
@@ -163,7 +164,7 @@ export function HeroSection() {
         }}
       >
         {/* Badge */}
-        <motion.div
+        {/* <motion.div
           custom={0}
           variants={fadeUp}
           initial="hidden"
@@ -198,7 +199,7 @@ export function HeroSection() {
             />
             The Intelligent OS for African Commerce
           </span>
-        </motion.div>
+        </motion.div> */}
 
         {/* Headline */}
         <motion.h1
@@ -215,10 +216,14 @@ export function HeroSection() {
             maxWidth: "900px",
           }}
         >
-          Your Business.
+          <DecryptedText text="Your Business." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
           <br />
-          <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>Finally</em>{" "}
-          <span style={{ color: "var(--amber)" }}>Sees Everything.</span>
+          <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
+            <DecryptedText text="Finally" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+          </em>{" "}
+          <span style={{ color: "var(--amber)" }}>
+            <DecryptedText text="Sees Everything." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+          </span>
         </motion.h1>
 
         {/* Subtitle */}

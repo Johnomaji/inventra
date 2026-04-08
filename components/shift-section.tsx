@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32, scale: 0.97 },
@@ -86,11 +87,11 @@ export function ShiftSection() {
               margin: "0 auto 20px",
             }}
           >
-            What if your inventory
+            <DecryptedText text="What if your inventory" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            could{" "}
+            <DecryptedText text="could " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <em style={{ fontStyle: "normal", color: "#a67cff" }}>
-              think for itself?
+              <DecryptedText text="think for itself?" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </h2>
           <p

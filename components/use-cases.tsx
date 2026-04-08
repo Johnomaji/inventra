@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const cases = [
   {
@@ -137,9 +138,9 @@ export function UseCases() {
                 lineHeight: 1.1,
               }}
             >
-              One Platform.
+              <DecryptedText text="One Platform." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               <br />
-              Every Market.
+              <DecryptedText text="Every Market." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </h2>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end" }}>

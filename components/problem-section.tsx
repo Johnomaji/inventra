@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const pains = [
   {
@@ -115,9 +116,9 @@ export function ProblemSection() {
                 lineHeight: 1.1,
               }}
             >
-              African businesses are{" "}
+              <DecryptedText text="African businesses are " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               <em style={{ fontStyle: "normal", color: "#ff5252" }}>
-                flying blind.
+                <DecryptedText text="flying blind." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               </em>
             </h2>
             <p

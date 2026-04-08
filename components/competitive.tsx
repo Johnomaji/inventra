@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const rows = [
   {
@@ -114,8 +115,9 @@ export function Competitive() {
                   lineHeight: 1.1,
                 }}
               >
-                Not Better Software.
-                <br />A New Category.
+                <DecryptedText text="Not Better Software." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+                <br />
+                <DecryptedText text="A New Category." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
               </h2>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>

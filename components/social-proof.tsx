@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DecryptedText } from "@/components/decrypted-text";
 
 const logos = [
   "Y Combinator",
@@ -94,9 +95,9 @@ export function SocialProof() {
               lineHeight: 1.1,
             }}
           >
-            Trusted by Builders,
+            <DecryptedText text="Trusted by Builders," animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            Backed by Believers
+            <DecryptedText text="Backed by Believers" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
           </h2>
           <p
             style={{
