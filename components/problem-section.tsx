@@ -44,7 +44,7 @@ export function ProblemSection() {
     <section
       id="problem"
       style={{
-        padding: "120px 24px",
+        padding: "80px 24px",
         background: "var(--bg2)",
         overflow: "hidden",
         position: "relative",
@@ -67,7 +67,7 @@ export function ProblemSection() {
 
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
           position: "relative",
           zIndex: 1,
@@ -81,33 +81,7 @@ export function ProblemSection() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "64px" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(255,82,82,0.08)",
-              border: "1px solid rgba(255,82,82,0.2)",
-              color: "#ff5252",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "24px",
-            }}
-          >
-            ⚠ The Reality
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "48px",
-              alignItems: "end",
-            }}
-          >
+          <div className="problem-header-grid">
             <h2
               style={{
                 fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -213,8 +187,8 @@ export function ProblemSection() {
             {/* Stat 2 */}
             <div
               style={{
-                background: "rgba(255,179,0,0.05)",
-                border: "1px solid rgba(255,179,0,0.18)",
+                background: "rgba(196,154,42,0.05)",
+                border: "1px solid rgba(196,154,42,0.18)",
                 borderRadius: "20px",
                 padding: "40px 32px",
                 flex: 1,
@@ -227,7 +201,7 @@ export function ProblemSection() {
                   position: "absolute",
                   inset: 0,
                   background:
-                    "radial-gradient(ellipse at top right, rgba(255,179,0,0.07), transparent 60%)",
+                    "radial-gradient(ellipse at top right, rgba(196,154,42,0.07), transparent 60%)",
                   pointerEvents: "none",
                 }}
               />
@@ -251,7 +225,7 @@ export function ProblemSection() {
                   fontFamily:
                     "var(--font-space-mono), Space Mono, monospace",
                   fontSize: "0.68rem",
-                  color: "rgba(255,179,0,0.7)",
+                  color: "rgba(196,154,42,0.7)",
                   lineHeight: 1.6,
                   letterSpacing: "0.02em",
                   position: "relative",

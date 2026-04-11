@@ -40,7 +40,7 @@ export function Footer() {
     >
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
           padding: "72px 24px 40px",
         }}
@@ -60,19 +60,19 @@ export function Footer() {
             <Link
               href="/"
               style={{
-                fontFamily: "var(--font-syne), Syne, sans-serif",
-                fontWeight: 800,
-                fontSize: "1.6rem",
-                letterSpacing: "-0.02em",
-                color: "var(--text)",
                 textDecoration: "none",
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "2px",
                 marginBottom: "16px",
               }}
             >
-              Inven<span style={{ color: "var(--cyan)" }}>tra</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/inventralogo.svg"
+                alt="Inventra"
+                style={{ height: "32px", width: "auto", display: "block" }}
+                className="nav-logo"
+              />
             </Link>
 
             <p
@@ -94,8 +94,8 @@ export function Footer() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(0,229,255,0.06)",
-                border: "1px solid rgba(0,229,255,0.15)",
+                background: "rgba(248,124,43,0.06)",
+                border: "1px solid rgba(248,124,43,0.15)",
                 borderRadius: "100px",
                 padding: "7px 14px",
                 marginBottom: "24px",

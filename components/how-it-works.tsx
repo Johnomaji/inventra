@@ -10,7 +10,7 @@ const steps = [
     colorRgb: "0,229,255",
     title: "Connect Your Business",
     desc: "Link your POS, supplier data, or import a spreadsheet. Inventra maps your full inventory ecosystem in under 10 minutes.",
-    detail: "No hardware. No IT team. No months-long onboarding.",
+    detail: "Works with WhatsApp order sheets, Excel, any POS, or nothing.",
   },
   {
     num: "02",
@@ -26,7 +26,7 @@ const steps = [
     colorRgb: "255,179,0",
     title: "Command with Clarity",
     desc: "From day 8, Inventra surfaces predictions, alerts, and AR-powered visibility tools so you can make decisions in seconds, not hours.",
-    detail: "Intelligence activated. Business transformed.",
+    detail: "From flying blind to total clarity.",
   },
 ];
 
@@ -35,7 +35,7 @@ export function HowItWorks() {
     <section
       id="how"
       style={{
-        padding: "clamp(64px, 10vw, 140px) 24px",
+        padding: "clamp(48px, 8vw, 96px) 24px",
         background: "var(--bg2)",
         overflow: "hidden",
         position: "relative",
@@ -43,7 +43,7 @@ export function HowItWorks() {
     >
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
         }}
       >
@@ -65,26 +65,6 @@ export function HowItWorks() {
             }}
           >
             <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(0,229,255,0.08)",
-                  border: "1px solid rgba(0,229,255,0.2)",
-                  color: "var(--cyan)",
-                  fontFamily:
-                    "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.68rem",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  padding: "7px 18px",
-                  borderRadius: "100px",
-                  marginBottom: "20px",
-                }}
-              >
-                ◈ Simple by Design
-              </div>
               <h2
                 style={{
                   fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)",

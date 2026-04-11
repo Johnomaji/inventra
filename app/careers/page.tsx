@@ -54,9 +54,9 @@ const values = [
 ];
 
 const colorMap: Record<string, { bg: string; border: string; color: string }> = {
-  cyan: { bg: "rgba(0,229,255,0.08)", border: "rgba(0,229,255,0.2)", color: "var(--cyan)" },
-  amber: { bg: "rgba(255,179,0,0.08)", border: "rgba(255,179,0,0.2)", color: "var(--amber)" },
-  violet: { bg: "rgba(124,77,255,0.08)", border: "rgba(124,77,255,0.2)", color: "#a67cff" },
+  cyan: { bg: "rgba(248,124,43,0.08)", border: "rgba(248,124,43,0.2)", color: "var(--cyan)" },
+  amber: { bg: "rgba(196,154,42,0.08)", border: "rgba(196,154,42,0.2)", color: "var(--amber)" },
+  violet: { bg: "rgba(39,97,146,0.08)", border: "rgba(39,97,146,0.2)", color: "#5b9fd4" },
 };
 
 export default function CareersPage() {
@@ -79,7 +79,7 @@ export default function CareersPage() {
               position: "absolute",
               width: "700px",
               height: "500px",
-              background: "radial-gradient(ellipse, rgba(124,77,255,0.09) 0%, transparent 70%)",
+              background: "radial-gradient(ellipse, rgba(39,97,146,0.09) 0%, transparent 70%)",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
@@ -92,9 +92,9 @@ export default function CareersPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(124,77,255,0.08)",
-                border: "1px solid rgba(124,77,255,0.2)",
-                color: "#a67cff",
+                background: "rgba(39,97,146,0.08)",
+                border: "1px solid rgba(39,97,146,0.2)",
+                color: "#5b9fd4",
                 fontFamily: "var(--font-space-mono), Space Mono, monospace",
                 fontSize: "0.7rem",
                 letterSpacing: "0.1em",
@@ -132,7 +132,7 @@ export default function CareersPage() {
           </div>
         </section>
 
-        <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "60px 24px 100px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "60px 24px 100px" }}>
           {/* Values */}
           <h2 style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 800, fontSize: "1.6rem", marginBottom: "32px" }}>
             How We Work
@@ -257,8 +257,8 @@ export default function CareersPage() {
           <div
             style={{
               marginTop: "72px",
-              background: "rgba(0,229,255,0.03)",
-              border: "1px solid rgba(0,229,255,0.12)",
+              background: "rgba(248,124,43,0.03)",
+              border: "1px solid rgba(248,124,43,0.12)",
               borderRadius: "14px",
               padding: "48px",
               textAlign: "center",

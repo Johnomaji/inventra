@@ -58,7 +58,7 @@ export default function EarlyAccessPage() {
               width: "800px",
               height: "600px",
               background:
-                "radial-gradient(ellipse, rgba(0,229,255,0.09) 0%, rgba(124,77,255,0.04) 50%, transparent 70%)",
+                "radial-gradient(ellipse, rgba(248,124,43,0.09) 0%, rgba(39,97,146,0.04) 50%, transparent 70%)",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
@@ -76,8 +76,8 @@ export default function EarlyAccessPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(255,179,0,0.08)",
-                border: "1px solid rgba(255,179,0,0.2)",
+                background: "rgba(196,154,42,0.08)",
+                border: "1px solid rgba(196,154,42,0.2)",
                 color: "var(--amber)",
                 fontFamily: "var(--font-space-mono), Space Mono, monospace",
                 fontSize: "0.7rem",
@@ -122,7 +122,7 @@ export default function EarlyAccessPage() {
         <section style={{ padding: "0 24px 100px" }}>
           <div
             style={{
-              maxWidth: "1120px",
+              maxWidth: "1280px",
               margin: "0 auto",
             }}
             className="ea-grid"
@@ -136,8 +136,8 @@ export default function EarlyAccessPage() {
               {submitted ? (
                 <div
                   style={{
-                    background: "rgba(0,229,255,0.05)",
-                    border: "1px solid rgba(0,229,255,0.2)",
+                    background: "rgba(248,124,43,0.05)",
+                    border: "1px solid rgba(248,124,43,0.2)",
                     borderRadius: "14px",
                     padding: "48px",
                     textAlign: "center",
@@ -493,8 +493,8 @@ export default function EarlyAccessPage() {
               {/* What to expect */}
               <div
                 style={{
-                  background: "rgba(0,229,255,0.03)",
-                  border: "1px solid rgba(0,229,255,0.1)",
+                  background: "rgba(248,124,43,0.03)",
+                  border: "1px solid rgba(248,124,43,0.1)",
                   borderRadius: "10px",
                   padding: "28px",
                 }}
@@ -523,8 +523,8 @@ export default function EarlyAccessPage() {
                           width: "24px",
                           height: "24px",
                           borderRadius: "50%",
-                          background: "rgba(0,229,255,0.15)",
-                          border: "1px solid rgba(0,229,255,0.3)",
+                          background: "rgba(248,124,43,0.15)",
+                          border: "1px solid rgba(248,124,43,0.3)",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",

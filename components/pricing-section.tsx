@@ -24,8 +24,8 @@ const plans = [
     ctaStyle: "outline",
     featured: false,
     accentColor: "var(--cyan)",
-    accentBg: "rgba(0,229,255,0.06)",
-    accentBorder: "rgba(0,229,255,0.15)",
+    accentBg: "rgba(248,124,43,0.06)",
+    accentBorder: "rgba(248,124,43,0.15)",
   },
   {
     tier: "Growth",
@@ -46,8 +46,8 @@ const plans = [
     ctaStyle: "filled",
     featured: true,
     accentColor: "var(--cyan)",
-    accentBg: "rgba(0,229,255,0.06)",
-    accentBorder: "rgba(0,229,255,0.15)",
+    accentBg: "rgba(248,124,43,0.06)",
+    accentBorder: "rgba(248,124,43,0.15)",
   },
   {
     tier: "Enterprise",
@@ -67,9 +67,9 @@ const plans = [
     cta: "Talk to Sales →",
     ctaStyle: "outline",
     featured: false,
-    accentColor: "#a67cff",
-    accentBg: "rgba(124,77,255,0.06)",
-    accentBorder: "rgba(124,77,255,0.15)",
+    accentColor: "#5b9fd4",
+    accentBg: "rgba(39,97,146,0.06)",
+    accentBorder: "rgba(39,97,146,0.15)",
   },
 ];
 
@@ -91,7 +91,7 @@ export function PricingSection() {
   return (
     <section
       id="pricing"
-      style={{ padding: "120px 24px", background: "var(--bg)", overflow: "hidden" }}
+      style={{ padding: "80px 24px", background: "var(--bg)", overflow: "hidden" }}
     >
       {/* Background glow */}
       <div
@@ -100,7 +100,7 @@ export function PricingSection() {
           width: "800px",
           height: "600px",
           background:
-            "radial-gradient(ellipse, rgba(0,229,255,0.05) 0%, rgba(124,77,255,0.03) 50%, transparent 70%)",
+            "radial-gradient(ellipse, rgba(248,124,43,0.05) 0%, rgba(39,97,146,0.03) 50%, transparent 70%)",
           top: "30%",
           left: "50%",
           transform: "translateX(-50%)",
@@ -113,29 +113,10 @@ export function PricingSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7 }}
-        style={{ maxWidth: "1120px", margin: "0 auto", position: "relative", zIndex: 1 }}
+        style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 1 }}
       >
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "72px" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(0,229,255,0.08)",
-              border: "1px solid rgba(0,229,255,0.2)",
-              color: "var(--cyan)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "20px",
-            }}
-          >
-            ◎ Simple Pricing
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -196,7 +177,7 @@ export function PricingSection() {
                 position: "relative",
                 overflow: "hidden",
                 boxShadow: plan.featured
-                  ? "0 16px 60px rgba(0,229,255,0.1), 0 4px 16px rgba(0,0,0,0.1)"
+                  ? "0 16px 60px rgba(248,124,43,0.1), 0 4px 16px rgba(0,0,0,0.1)"
                   : "0 4px 20px rgba(0,0,0,0.04)",
               }}
             >

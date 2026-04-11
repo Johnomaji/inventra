@@ -7,8 +7,8 @@ import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Features", href: "/features" },
-  { label: "How It Works", href: "/#how" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Use Cases", href: "/#use-cases" },
 ];
@@ -81,37 +81,23 @@ export function Navbar() {
         <Link
           href="/"
           style={{
-            fontFamily: "var(--font-syne), Syne, sans-serif",
-            fontWeight: 800,
-            fontSize: "1.35rem",
-            letterSpacing: "-0.02em",
-            color: "var(--text)",
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
-            gap: "2px",
             flexShrink: 0,
           }}
         >
-          <span>Inven</span>
-          <span style={{ color: "var(--cyan)" }}>tra</span>
-          <span
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/inventralogo.svg"
+            alt="Inventra"
             style={{
-              marginLeft: "8px",
-              background: "rgba(0,229,255,0.1)",
-              border: "1px solid rgba(0,229,255,0.2)",
-              color: "var(--cyan)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.52rem",
-              letterSpacing: "0.12em",
-              padding: "3px 8px",
-              borderRadius: "4px",
-              textTransform: "uppercase",
-              fontWeight: 400,
+              height: "36px",
+              width: "auto",
+              display: "block",
             }}
-          >
-            OS
-          </span>
+            className="nav-logo"
+          />
         </Link>
 
         {/* Desktop nav — pill container */}

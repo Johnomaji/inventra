@@ -22,7 +22,7 @@ export function ShiftSection() {
     <section
       id="shift"
       style={{
-        padding: "140px 24px",
+        padding: "96px 24px",
         overflow: "hidden",
         position: "relative",
       }}
@@ -34,7 +34,7 @@ export function ShiftSection() {
           width: "1100px",
           height: "700px",
           background:
-            "radial-gradient(ellipse, rgba(124,77,255,0.08) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(39,97,146,0.08) 0%, transparent 65%)",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
@@ -44,7 +44,7 @@ export function ShiftSection() {
 
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
           position: "relative",
           zIndex: 2,
@@ -58,25 +58,6 @@ export function ShiftSection() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "64px", textAlign: "center" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(124,77,255,0.08)",
-              border: "1px solid rgba(124,77,255,0.2)",
-              color: "#a67cff",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "24px",
-            }}
-          >
-            ◈ The New Era
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
@@ -87,11 +68,11 @@ export function ShiftSection() {
               margin: "0 auto 20px",
             }}
           >
-            <DecryptedText text="What if your inventory" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <DecryptedText text="What if you never ran" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            <DecryptedText text="could " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
-            <em style={{ fontStyle: "normal", color: "#a67cff" }}>
-              <DecryptedText text="think for itself?" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <DecryptedText text="out of stock " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <em style={{ fontStyle: "normal", color: "#5b9fd4" }}>
+              <DecryptedText text="again?" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </h2>
           <p
@@ -105,10 +86,10 @@ export function ShiftSection() {
               marginTop: "16px",
             }}
           >
-            We&apos;re not building a better spreadsheet. We&apos;re building a
-            different reality — one where AI anticipates demand before it
-            happens, AR lets you see every item without scanning, and VR puts
-            you inside your operation from anywhere on the continent.
+            Not a better spreadsheet. Not another dashboard showing you what
+            already happened. Inventra predicts the gap before it appears, lets
+            you see stock through your phone camera, and puts you inside your
+            warehouse from anywhere in Africa.
           </p>
         </motion.div>
 
@@ -137,7 +118,7 @@ export function ShiftSection() {
               position: "relative",
               overflow: "hidden",
               cursor: "default",
-              boxShadow: "0 16px 60px rgba(124,77,255,0.3)",
+              boxShadow: "0 16px 60px rgba(39,97,146,0.3)",
             }}
           >
             {/* Inner glows */}
@@ -158,7 +139,7 @@ export function ShiftSection() {
                 width: "300px",
                 height: "300px",
                 background:
-                  "radial-gradient(circle, rgba(0,229,255,0.12), transparent 60%)",
+                  "radial-gradient(circle, rgba(248,124,43,0.12), transparent 60%)",
                 pointerEvents: "none",
               }}
             />
@@ -239,41 +220,7 @@ export function ShiftSection() {
               optimal reorder windows before you feel the pain.
             </p>
 
-            {/* Feature tags */}
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-                flexWrap: "wrap",
-                marginTop: "36px",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              {[
-                "Demand Forecasting",
-                "Anomaly Detection",
-                "Smart Reorder",
-                "Natural Language",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    background: "rgba(255,255,255,0.12)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    color: "rgba(255,255,255,0.85)",
-                    fontFamily:
-                      "var(--font-space-mono), Space Mono, monospace",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.08em",
-                    padding: "5px 12px",
-                    borderRadius: "100px",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            
           </motion.div>
 
           {/* AR Card */}
@@ -382,7 +329,7 @@ export function ShiftSection() {
                 right: 0,
                 height: "2px",
                 background:
-                  "linear-gradient(90deg, rgba(124,77,255,0.7), transparent)",
+                  "linear-gradient(90deg, rgba(39,97,146,0.7), transparent)",
                 borderRadius: "24px 24px 0 0",
               }}
             />
@@ -400,7 +347,7 @@ export function ShiftSection() {
                 fontSize: "0.6rem",
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: "#a67cff",
+                color: "#5b9fd4",
                 marginBottom: "12px",
                 opacity: 0.8,
               }}

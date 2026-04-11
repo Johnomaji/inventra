@@ -129,7 +129,7 @@ export default function DocsPage() {
             padding: "60px 24px",
           }}
         >
-          <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -138,8 +138,8 @@ export default function DocsPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
+                background: "rgba(248,124,43,0.08)",
+                border: "1px solid rgba(248,124,43,0.2)",
                 color: "var(--cyan)",
                 fontFamily: "var(--font-space-mono), Space Mono, monospace",
                 fontSize: "0.7rem",
@@ -187,12 +187,12 @@ export default function DocsPage() {
                 alignItems: "center",
                 gap: "12px",
                 background: focused ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.04)",
-                border: `1px solid ${focused ? "rgba(0,229,255,0.4)" : "var(--border)"}`,
+                border: `1px solid ${focused ? "rgba(248,124,43,0.4)" : "var(--border)"}`,
                 borderRadius: "8px",
                 padding: "12px 20px",
                 maxWidth: "480px",
                 transition: "border-color 0.25s, background 0.25s",
-                boxShadow: focused ? "0 0 0 3px rgba(0,229,255,0.08)" : "none",
+                boxShadow: focused ? "0 0 0 3px rgba(248,124,43,0.08)" : "none",
               }}
             >
               <Search size={16} style={{ color: "var(--muted)", flexShrink: 0 }} />
@@ -249,7 +249,7 @@ export default function DocsPage() {
           </div>
         </div>
 
-        <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "60px 24px 100px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "60px 24px 100px" }}>
           {/* Quick Start — only show when not searching */}
           <AnimatePresence>
             {!query && (
@@ -310,8 +310,8 @@ export default function DocsPage() {
                         <span>{item.step}</span>
                         <span
                           style={{
-                            background: "rgba(0,229,255,0.08)",
-                            border: "1px solid rgba(0,229,255,0.15)",
+                            background: "rgba(248,124,43,0.08)",
+                            border: "1px solid rgba(248,124,43,0.15)",
                             padding: "2px 8px",
                             borderRadius: "3px",
                           }}
@@ -468,8 +468,8 @@ export default function DocsPage() {
               style={{
                 marginTop: "64px",
                 padding: "28px 32px",
-                background: "rgba(255,179,0,0.04)",
-                border: "1px solid rgba(255,179,0,0.15)",
+                background: "rgba(196,154,42,0.04)",
+                border: "1px solid rgba(196,154,42,0.15)",
                 borderRadius: "10px",
                 display: "flex",
                 alignItems: "flex-start",

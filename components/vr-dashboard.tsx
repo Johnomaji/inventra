@@ -46,7 +46,7 @@ export function VrDashboard() {
     <section
       id="vr-dashboard"
       style={{
-        padding: "120px 24px",
+        padding: "80px 24px",
         background: "var(--bg)",
         position: "relative",
         overflow: "hidden",
@@ -58,7 +58,7 @@ export function VrDashboard() {
           width: "700px",
           height: "700px",
           background:
-            "radial-gradient(circle, rgba(124,77,255,0.07) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(39,97,146,0.07) 0%, transparent 65%)",
           bottom: "-200px",
           left: "-100px",
           pointerEvents: "none",
@@ -66,7 +66,7 @@ export function VrDashboard() {
       />
 
       <div
-        style={{ maxWidth: "1120px", margin: "0 auto", position: "relative", zIndex: 1 }}
+        style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 1 }}
       >
         {/* Header */}
         <motion.div
@@ -76,25 +76,6 @@ export function VrDashboard() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "64px", textAlign: "center" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(124,77,255,0.08)",
-              border: "1px solid rgba(124,77,255,0.2)",
-              color: "#a67cff",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "20px",
-            }}
-          >
-            ◎ Inventra VR Hub
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
@@ -107,7 +88,7 @@ export function VrDashboard() {
             <DecryptedText text="Manage Every Location" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
             <DecryptedText text="from " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
-            <em style={{ fontStyle: "normal", color: "#a67cff" }}>
+            <em style={{ fontStyle: "normal", color: "#5b9fd4" }}>
               <DecryptedText text="Anywhere" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </h2>
@@ -151,11 +132,11 @@ export function VrDashboard() {
           >
             <div
               style={{
-                background: "rgba(124,77,255,0.04)",
-                border: "1px solid rgba(124,77,255,0.18)",
+                background: "rgba(39,97,146,0.04)",
+                border: "1px solid rgba(39,97,146,0.18)",
                 borderRadius: "24px",
                 padding: "32px",
-                boxShadow: "0 8px 48px rgba(124,77,255,0.08)",
+                boxShadow: "0 8px 48px rgba(39,97,146,0.08)",
                 position: "relative",
                 overflow: "hidden",
               }}
@@ -224,8 +205,8 @@ export function VrDashboard() {
               {/* Inner VR space */}
               <div
                 style={{
-                  background: "rgba(124,77,255,0.06)",
-                  border: "1px solid rgba(124,77,255,0.18)",
+                  background: "rgba(39,97,146,0.06)",
+                  border: "1px solid rgba(39,97,146,0.18)",
                   borderRadius: "12px",
                   padding: "24px",
                   position: "relative",
@@ -237,7 +218,7 @@ export function VrDashboard() {
                     position: "absolute",
                     inset: 0,
                     background:
-                      "radial-gradient(ellipse at center, rgba(124,77,255,0.1), transparent 70%)",
+                      "radial-gradient(ellipse at center, rgba(39,97,146,0.1), transparent 70%)",
                     pointerEvents: "none",
                   }}
                 />
@@ -248,7 +229,7 @@ export function VrDashboard() {
                     position: "absolute",
                     inset: 0,
                     backgroundImage:
-                      "linear-gradient(rgba(124,77,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(124,77,255,0.08) 1px, transparent 1px)",
+                      "linear-gradient(rgba(39,97,146,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(39,97,146,0.08) 1px, transparent 1px)",
                     backgroundSize: "40px 40px",
                     pointerEvents: "none",
                   }}
@@ -269,7 +250,7 @@ export function VrDashboard() {
                       key={loc.label}
                       style={{
                         background: "rgba(5,8,26,0.7)",
-                        border: "1px solid rgba(124,77,255,0.25)",
+                        border: "1px solid rgba(39,97,146,0.25)",
                         borderRadius: "8px",
                         padding: "14px 12px",
                         backdropFilter: "blur(4px)",
@@ -288,7 +269,7 @@ export function VrDashboard() {
                             fontFamily:
                               "var(--font-space-mono), Space Mono, monospace",
                             fontSize: "0.55rem",
-                            color: "#a67cff",
+                            color: "#5b9fd4",
                             letterSpacing: "0.1em",
                             textTransform: "uppercase",
                           }}
@@ -325,7 +306,7 @@ export function VrDashboard() {
                       <div
                         style={{
                           height: "4px",
-                          background: "rgba(124,77,255,0.2)",
+                          background: "rgba(39,97,146,0.2)",
                           borderRadius: "2px",
                           overflow: "hidden",
                         }}
@@ -369,14 +350,14 @@ export function VrDashboard() {
                 custom={i}
                 variants={fadeUp}
                 whileHover={{
-                  borderColor: "rgba(124,77,255,0.3)",
-                  background: "rgba(124,77,255,0.05)",
+                  borderColor: "rgba(39,97,146,0.3)",
+                  background: "rgba(39,97,146,0.05)",
                   transition: { duration: 0.2 },
                 }}
                 style={{
                   padding: "28px 24px",
-                  background: "rgba(124,77,255,0.02)",
-                  border: "1px solid rgba(124,77,255,0.12)",
+                  background: "rgba(39,97,146,0.02)",
+                  border: "1px solid rgba(39,97,146,0.12)",
                   borderRadius: "16px",
                   cursor: "default",
                   transition: "all 0.3s",
@@ -387,7 +368,7 @@ export function VrDashboard() {
                     fontFamily: "var(--font-syne), Syne, sans-serif",
                     fontWeight: 800,
                     fontSize: "2.5rem",
-                    color: "rgba(124,77,255,0.25)",
+                    color: "rgba(39,97,146,0.25)",
                     lineHeight: 1,
                     marginBottom: "12px",
                     letterSpacing: "-0.04em",

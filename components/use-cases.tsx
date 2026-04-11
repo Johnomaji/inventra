@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { DecryptedText } from "@/components/decrypted-text";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const cases = [
   {
@@ -69,11 +71,33 @@ const fadeUp = {
 };
 
 export function UseCases() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollTo = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(index, cases.length - 1));
+    const cardWidth = el.clientWidth * 0.8;
+    const gap = el.clientWidth * 0.04;
+    el.scrollTo({ left: clamped * (cardWidth + gap), behavior: "smooth" });
+    setActiveIndex(clamped);
+  };
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.clientWidth * 0.8;
+    const gap = el.clientWidth * 0.04;
+    const index = Math.round(el.scrollLeft / (cardWidth + gap));
+    setActiveIndex(Math.max(0, Math.min(index, cases.length - 1)));
+  };
+
   return (
     <section
       id="use-cases"
       style={{
-        padding: "120px 24px",
+        padding: "80px 0",
         background: "var(--bg)",
         overflow: "hidden",
         position: "relative",
@@ -85,7 +109,7 @@ export function UseCases() {
           width: "600px",
           height: "500px",
           background:
-            "radial-gradient(ellipse, rgba(0,229,255,0.04) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(248,124,43,0.04) 0%, transparent 65%)",
           top: "20%",
           right: "-100px",
           pointerEvents: "none",
@@ -93,7 +117,7 @@ export function UseCases() {
       />
 
       <div
-        style={{ maxWidth: "1120px", margin: "0 auto", position: "relative", zIndex: 1 }}
+        style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 1, padding: "0 24px" }}
       >
         {/* Header */}
         <motion.div
@@ -101,6 +125,7 @@ export function UseCases() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7 }}
+          className="use-cases-header"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -110,26 +135,6 @@ export function UseCases() {
           }}
         >
           <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
-                color: "var(--cyan)",
-                fontFamily:
-                  "var(--font-space-mono), Space Mono, monospace",
-                fontSize: "0.68rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                padding: "7px 18px",
-                borderRadius: "100px",
-                marginBottom: "20px",
-              }}
-            >
-              ◎ Built for Your Industry
-            </div>
             <h2
               style={{
                 fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -157,8 +162,10 @@ export function UseCases() {
             </p>
           </div>
         </motion.div>
+      </div>
 
-        {/* Bento grid layout */}
+      {/* Desktop bento grid — hidden on mobile */}
+      <div className="hidden md:block" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px", position: "relative", zIndex: 1 }}>
         <motion.div
           variants={{
             hidden: {},
@@ -187,7 +194,7 @@ export function UseCases() {
               position: "relative",
               overflow: "hidden",
               cursor: "default",
-              boxShadow: "0 12px 48px rgba(0,229,255,0.18)",
+              boxShadow: "0 12px 48px rgba(248,124,43,0.18)",
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
               gap: "48px",
@@ -263,7 +270,7 @@ export function UseCases() {
             </div>
           </motion.div>
 
-          {/* Pharmaceuticals */}
+          {/* Remaining 5 cases */}
           {cases.slice(1).map((c, i) => (
             <motion.div
               key={c.title}
@@ -326,6 +333,202 @@ export function UseCases() {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Mobile carousel — hidden on desktop */}
+      <div className="block md:hidden">
+        {/* Scroll track */}
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            scrollSnapType: "x mandatory",
+            scrollbarWidth: "none",
+            WebkitOverflowScrolling: "touch",
+            gap: "4vw",
+            paddingLeft: "10vw",
+            paddingRight: "10vw",
+            paddingBottom: "4px",
+          }}
+        >
+          {cases.map((c, i) => (
+            <div
+              key={c.title}
+              style={{
+                scrollSnapAlign: "center",
+                flex: "0 0 80vw",
+                background: i === 0 ? "var(--cyan)" : "var(--surface)",
+                border: i === 0 ? "none" : "1px solid var(--border)",
+                borderRadius: "20px",
+                padding: "32px 28px",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: i === 0
+                  ? "0 12px 48px rgba(248,124,43,0.18)"
+                  : "0 4px 20px rgba(0,0,0,0.04)",
+              }}
+            >
+              {i === 0 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "radial-gradient(ellipse at top right, rgba(255,255,255,0.15), transparent 55%)",
+                    pointerEvents: "none",
+                  }}
+                />
+              )}
+              {i === 0 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: "-20px",
+                    right: "16px",
+                    fontSize: "7rem",
+                    opacity: 0.1,
+                    pointerEvents: "none",
+                    userSelect: "none",
+                  }}
+                >
+                  {c.emoji}
+                </div>
+              )}
+              <span
+                style={{
+                  fontSize: "2rem",
+                  marginBottom: "16px",
+                  display: "block",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {c.emoji}
+              </span>
+              <h3
+                style={{
+                  fontSize: "1.1rem",
+                  marginBottom: "10px",
+                  fontFamily: "var(--font-syne), Syne, sans-serif",
+                  fontWeight: 800,
+                  color: i === 0 ? "var(--bg)" : "var(--text)",
+                  letterSpacing: "-0.02em",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {c.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.88rem",
+                  color: i === 0 ? "rgba(5,8,16,0.72)" : "var(--muted)",
+                  lineHeight: 1.75,
+                  marginBottom: "20px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                {c.desc}
+              </p>
+              <div
+                style={{
+                  fontFamily: "var(--font-space-mono), Space Mono, monospace",
+                  fontSize: "0.65rem",
+                  color: i === 0 ? "rgba(5,8,16,0.5)" : "var(--cyan)",
+                  borderTop: `1px solid ${i === 0 ? "rgba(5,8,16,0.15)" : "var(--border)"}`,
+                  paddingTop: "12px",
+                  position: "relative",
+                  zIndex: 1,
+                  letterSpacing: "0.04em",
+                }}
+              >
+                {c.market}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Controls */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "16px",
+            marginTop: "24px",
+            padding: "0 24px",
+          }}
+        >
+          {/* Prev arrow */}
+          <button
+            onClick={() => scrollTo(activeIndex - 1)}
+            disabled={activeIndex === 0}
+            style={{
+              background: activeIndex === 0 ? "var(--surface)" : "var(--surface2)",
+              border: "1px solid var(--border)",
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: activeIndex === 0 ? "not-allowed" : "pointer",
+              color: activeIndex === 0 ? "var(--muted)" : "var(--text)",
+              transition: "all 0.2s",
+              flexShrink: 0,
+            }}
+            aria-label="Previous"
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          {/* Dots */}
+          <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+            {cases.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                style={{
+                  width: i === activeIndex ? "20px" : "6px",
+                  height: "6px",
+                  borderRadius: "3px",
+                  background: i === activeIndex ? "var(--cyan)" : "var(--border-strong)",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 0,
+                  transition: "all 0.25s",
+                }}
+                aria-label={`Go to ${cases[i].title}`}
+              />
+            ))}
+          </div>
+
+          {/* Next arrow */}
+          <button
+            onClick={() => scrollTo(activeIndex + 1)}
+            disabled={activeIndex === cases.length - 1}
+            style={{
+              background: activeIndex === cases.length - 1 ? "var(--surface)" : "var(--surface2)",
+              border: "1px solid var(--border)",
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: activeIndex === cases.length - 1 ? "not-allowed" : "pointer",
+              color: activeIndex === cases.length - 1 ? "var(--muted)" : "var(--text)",
+              transition: "all 0.2s",
+              flexShrink: 0,
+            }}
+            aria-label="Next"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
       </div>
     </section>
   );

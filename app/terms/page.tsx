@@ -61,8 +61,8 @@ export default function TermsPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              background: "rgba(0,229,255,0.08)",
-              border: "1px solid rgba(0,229,255,0.2)",
+              background: "rgba(248,124,43,0.08)",
+              border: "1px solid rgba(248,124,43,0.2)",
               color: "var(--cyan)",
               fontFamily: "var(--font-space-mono), Space Mono, monospace",
               fontSize: "0.7rem",
@@ -133,8 +133,8 @@ export default function TermsPage() {
             style={{
               marginTop: "48px",
               padding: "24px",
-              background: "rgba(0,229,255,0.04)",
-              border: "1px solid rgba(0,229,255,0.12)",
+              background: "rgba(248,124,43,0.04)",
+              border: "1px solid rgba(248,124,43,0.12)",
               borderRadius: "8px",
             }}
           >

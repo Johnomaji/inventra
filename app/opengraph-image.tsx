@@ -42,7 +42,7 @@ export default function OGImage() {
             height: "680px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(0,229,255,0.12) 0%, rgba(124,77,255,0.06) 50%, transparent 70%)",
+              "radial-gradient(circle, rgba(248,124,43,0.12) 0%, rgba(39,97,146,0.06) 50%, transparent 70%)",
             display: "flex",
           }}
         />
@@ -55,7 +55,7 @@ export default function OGImage() {
             left: 0,
             right: 0,
             height: "4px",
-            background: "linear-gradient(90deg, #00e5ff, #7c4dff, #ffb300)",
+            background: "linear-gradient(90deg, #f87c2b, #276192, #C49A2A)",
             display: "flex",
           }}
         />
@@ -74,7 +74,7 @@ export default function OGImage() {
               width: "44px",
               height: "44px",
               borderRadius: "8px",
-              background: "linear-gradient(135deg, #00e5ff, #7c4dff)",
+              background: "linear-gradient(135deg, #f87c2b, #276192)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -141,9 +141,9 @@ export default function OGImage() {
             <div
               key={label}
               style={{
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
-                color: "#00e5ff",
+                background: "rgba(248,124,43,0.08)",
+                border: "1px solid rgba(248,124,43,0.2)",
+                color: "#f87c2b",
                 fontSize: "15px",
                 padding: "8px 18px",
                 borderRadius: "4px",

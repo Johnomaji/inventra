@@ -48,7 +48,7 @@ export function AiEngine() {
     <section
       id="ai-engine"
       style={{
-        padding: "120px 24px",
+        padding: "80px 24px",
         background: "var(--bg)",
         overflow: "hidden",
         position: "relative",
@@ -61,7 +61,7 @@ export function AiEngine() {
           width: "800px",
           height: "800px",
           background:
-            "radial-gradient(circle, rgba(0,229,255,0.06) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(248,124,43,0.06) 0%, transparent 65%)",
           top: "-150px",
           right: "-150px",
           pointerEvents: "none",
@@ -69,7 +69,7 @@ export function AiEngine() {
       />
 
       <div
-        style={{ maxWidth: "1120px", margin: "0 auto", position: "relative", zIndex: 1 }}
+        style={{ maxWidth: "1280px", margin: "0 auto", position: "relative", zIndex: 1 }}
       >
         {/* Header */}
         <motion.div
@@ -79,25 +79,6 @@ export function AiEngine() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "72px" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(0,229,255,0.08)",
-              border: "1px solid rgba(0,229,255,0.2)",
-              color: "var(--cyan)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "20px",
-            }}
-          >
-            ◎ Under the Hood
-          </div>
           <div
             style={{
               display: "grid",
@@ -168,7 +149,7 @@ export function AiEngine() {
               alignItems: "center",
               justifyContent: "center",
               gap: "28px",
-              boxShadow: "0 8px 40px rgba(0,229,255,0.06)",
+              boxShadow: "0 8px 40px rgba(248,124,43,0.06)",
               position: "relative",
               overflow: "hidden",
             }}
@@ -204,7 +185,7 @@ export function AiEngine() {
                   width: "100%",
                   height: "100%",
                   borderRadius: "50%",
-                  border: "1px solid rgba(0,229,255,0.12)",
+                  border: "1px solid rgba(248,124,43,0.12)",
                   animation: "rotate 20s linear infinite",
                 }}
               />
@@ -214,7 +195,7 @@ export function AiEngine() {
                   width: "72%",
                   height: "72%",
                   borderRadius: "50%",
-                  border: "1px solid rgba(124,77,255,0.15)",
+                  border: "1px solid rgba(39,97,146,0.15)",
                   animation: "rotate 12s linear infinite reverse",
                 }}
               />
@@ -224,7 +205,7 @@ export function AiEngine() {
                   width: "47%",
                   height: "47%",
                   borderRadius: "50%",
-                  border: "1px solid rgba(0,229,255,0.2)",
+                  border: "1px solid rgba(248,124,43,0.2)",
                   animation: "rotate 8s linear infinite",
                 }}
               />
@@ -233,9 +214,9 @@ export function AiEngine() {
                   width: "96px",
                   height: "96px",
                   background:
-                    "radial-gradient(circle, rgba(0,229,255,0.2), rgba(0,229,255,0.05))",
+                    "radial-gradient(circle, rgba(248,124,43,0.2), rgba(248,124,43,0.05))",
                   borderRadius: "50%",
-                  border: "1px solid rgba(0,229,255,0.3)",
+                  border: "1px solid rgba(248,124,43,0.3)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -293,8 +274,8 @@ export function AiEngine() {
                 <div
                   key={s.label}
                   style={{
-                    background: "rgba(0,229,255,0.04)",
-                    border: "1px solid rgba(0,229,255,0.1)",
+                    background: "rgba(248,124,43,0.04)",
+                    border: "1px solid rgba(248,124,43,0.1)",
                     borderRadius: "10px",
                     padding: "12px",
                     textAlign: "center",

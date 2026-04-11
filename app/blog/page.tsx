@@ -7,9 +7,9 @@ import { Footer } from "@/components/footer";
 import { featuredPost, regularPosts } from "@/lib/blog-data";
 
 const colorMap: Record<string, { bg: string; border: string; color: string }> = {
-  cyan: { bg: "rgba(0,229,255,0.08)", border: "rgba(0,229,255,0.2)", color: "var(--cyan)" },
-  amber: { bg: "rgba(255,179,0,0.08)", border: "rgba(255,179,0,0.2)", color: "var(--amber)" },
-  violet: { bg: "rgba(124,77,255,0.08)", border: "rgba(124,77,255,0.2)", color: "#a67cff" },
+  cyan: { bg: "rgba(248,124,43,0.08)", border: "rgba(248,124,43,0.2)", color: "var(--cyan)" },
+  amber: { bg: "rgba(196,154,42,0.08)", border: "rgba(196,154,42,0.2)", color: "var(--amber)" },
+  violet: { bg: "rgba(39,97,146,0.08)", border: "rgba(39,97,146,0.2)", color: "#5b9fd4" },
 };
 
 const easing = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -31,7 +31,7 @@ export default function BlogPage() {
       <main style={{ paddingTop: "80px", background: "var(--bg)", minHeight: "100vh" }}>
         {/* Header */}
         <div style={{ padding: "60px 24px 48px", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -40,8 +40,8 @@ export default function BlogPage() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
+                background: "rgba(248,124,43,0.08)",
+                border: "1px solid rgba(248,124,43,0.2)",
                 color: "var(--cyan)",
                 fontFamily: "var(--font-space-mono), Space Mono, monospace",
                 fontSize: "0.7rem",
@@ -73,7 +73,7 @@ export default function BlogPage() {
           </div>
         </div>
 
-        <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "60px 24px 100px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "60px 24px 100px" }}>
           {/* Featured post */}
           <motion.div
             initial={{ opacity: 0, y: 32, filter: "blur(6px)" }}
@@ -85,11 +85,11 @@ export default function BlogPage() {
               style={{ textDecoration: "none", color: "inherit", display: "block" }}
             >
               <motion.div
-                whileHover={{ scale: 1.005, boxShadow: "0 0 0 1px rgba(0,229,255,0.25), 0 20px 60px rgba(0,0,0,0.3)" }}
+                whileHover={{ scale: 1.005, boxShadow: "0 0 0 1px rgba(248,124,43,0.25), 0 20px 60px rgba(0,0,0,0.3)" }}
                 transition={{ duration: 0.25 }}
                 style={{
-                  background: "rgba(0,229,255,0.03)",
-                  border: "1px solid rgba(0,229,255,0.12)",
+                  background: "rgba(248,124,43,0.03)",
+                  border: "1px solid rgba(248,124,43,0.12)",
                   borderRadius: "14px",
                   padding: "48px",
                   marginBottom: "64px",

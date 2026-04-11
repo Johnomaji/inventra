@@ -59,7 +59,7 @@ function cellColor(val: string) {
   if (val.startsWith("✓")) return "#00e676";
   if (val === "✗") return "#ff5252";
   if (val === "Partial" || val === "Limited" || val === "Manual")
-    return "#ffb300";
+    return "#C49A2A";
   return "var(--muted)";
 }
 
@@ -67,14 +67,14 @@ export function Competitive() {
   return (
     <section
       id="competitive"
-      style={{ padding: "120px 24px", background: "var(--bg2)", overflow: "hidden" }}
+      style={{ padding: "80px 24px", background: "var(--bg2)", overflow: "hidden" }}
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7 }}
-        style={{ maxWidth: "1120px", margin: "0 auto" }}
+        style={{ maxWidth: "1280px", margin: "0 auto" }}
       >
         {/* Header */}
         <div style={{ marginBottom: "56px" }}>
@@ -87,26 +87,6 @@ export function Competitive() {
             }}
           >
             <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  background: "rgba(0,229,255,0.08)",
-                  border: "1px solid rgba(0,229,255,0.2)",
-                  color: "var(--cyan)",
-                  fontFamily:
-                    "var(--font-space-mono), Space Mono, monospace",
-                  fontSize: "0.68rem",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  padding: "7px 18px",
-                  borderRadius: "100px",
-                  marginBottom: "20px",
-                }}
-              >
-                ◎ Category Creation
-              </div>
               <h2
                 style={{
                   fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -179,7 +159,7 @@ export function Competitive() {
                         padding: "20px 24px",
                         background:
                           i === 1
-                            ? "rgba(0,229,255,0.07)"
+                            ? "rgba(248,124,43,0.07)"
                             : "transparent",
                         fontFamily:
                           "var(--font-syne), Syne, sans-serif",
@@ -191,11 +171,11 @@ export function Competitive() {
                           i === 1 ? "var(--cyan)" : "var(--text)",
                         borderLeft:
                           i === 1
-                            ? "1px solid rgba(0,229,255,0.15)"
+                            ? "1px solid rgba(248,124,43,0.15)"
                             : "none",
                         borderRight:
                           i === 1
-                            ? "1px solid rgba(0,229,255,0.15)"
+                            ? "1px solid rgba(248,124,43,0.15)"
                             : "none",
                       }}
                     >
@@ -204,7 +184,7 @@ export function Competitive() {
                           {h}
                           <span
                             style={{
-                              background: "rgba(0,229,255,0.15)",
+                              background: "rgba(248,124,43,0.15)",
                               color: "var(--cyan)",
                               fontFamily:
                                 "var(--font-space-mono), Space Mono, monospace",
@@ -266,15 +246,15 @@ export function Competitive() {
                           fontWeight: ci === 0 ? 500 : ci === 1 ? 600 : 400,
                           background:
                             ci === 1
-                              ? "rgba(0,229,255,0.03)"
+                              ? "rgba(248,124,43,0.03)"
                               : "transparent",
                           borderLeft:
                             ci === 1
-                              ? "1px solid rgba(0,229,255,0.07)"
+                              ? "1px solid rgba(248,124,43,0.07)"
                               : "none",
                           borderRight:
                             ci === 1
-                              ? "1px solid rgba(0,229,255,0.07)"
+                              ? "1px solid rgba(248,124,43,0.07)"
                               : "none",
                         }}
                       >

@@ -44,7 +44,7 @@ export function ArExperience() {
     <section
       id="ar-experience"
       style={{
-        padding: "120px 24px",
+        padding: "80px 24px",
         background: "var(--bg2)",
         position: "relative",
         overflow: "hidden",
@@ -55,14 +55,14 @@ export function ArExperience() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(135deg, rgba(255,179,0,0.02), transparent 50%)",
+            "linear-gradient(135deg, rgba(196,154,42,0.02), transparent 50%)",
           pointerEvents: "none",
         }}
       />
 
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
           position: "relative",
           zIndex: 1,
@@ -76,25 +76,6 @@ export function ArExperience() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "52px", textAlign: "center" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(255,179,0,0.08)",
-              border: "1px solid rgba(255,179,0,0.2)",
-              color: "var(--amber)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "20px",
-            }}
-          >
-            ◎ Inventra AR
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
@@ -142,10 +123,10 @@ export function ArExperience() {
           style={{
             width: "100%",
             aspectRatio: "21/9",
-            background: "rgba(255,179,0,0.03)",
-            border: "1px solid rgba(255,179,0,0.2)",
+            background: "rgba(196,154,42,0.03)",
+            border: "1px solid rgba(196,154,42,0.2)",
             borderRadius: "20px",
-            boxShadow: "0 12px 60px rgba(255,179,0,0.08)",
+            boxShadow: "0 12px 60px rgba(196,154,42,0.08)",
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
@@ -182,8 +163,8 @@ export function ArExperience() {
                 ...pos,
                 width: "24px",
                 height: "24px",
-                borderTop: "2px solid rgba(255,179,0,0.6)",
-                borderLeft: "2px solid rgba(255,179,0,0.6)",
+                borderTop: "2px solid rgba(196,154,42,0.6)",
+                borderLeft: "2px solid rgba(196,154,42,0.6)",
                 borderRadius: "2px 0 0 0",
               }}
             />
@@ -196,8 +177,8 @@ export function ArExperience() {
               top: "16px",
               left: "50%",
               transform: "translateX(-50%)",
-              background: "rgba(255,179,0,0.1)",
-              border: "1px solid rgba(255,179,0,0.3)",
+              background: "rgba(196,154,42,0.1)",
+              border: "1px solid rgba(196,154,42,0.3)",
               color: "var(--amber)",
               fontFamily: "var(--font-space-mono), Space Mono, monospace",
               fontSize: "0.6rem",
@@ -235,7 +216,7 @@ export function ArExperience() {
                 sku: "SKU-1189",
                 units: "LOW STOCK",
                 status: "⚠",
-                color: "rgba(255,179,0,0.9)",
+                color: "rgba(196,154,42,0.9)",
                 x: "0px",
                 delay: "1s",
               },
@@ -263,8 +244,8 @@ export function ArExperience() {
                   style={{
                     width: "80px",
                     height: "96px",
-                    background: "rgba(255,179,0,0.04)",
-                    border: "1px solid rgba(255,179,0,0.35)",
+                    background: "rgba(196,154,42,0.04)",
+                    border: "1px solid rgba(196,154,42,0.35)",
                     borderRadius: "4px",
                     display: "flex",
                     alignItems: "center",
@@ -368,8 +349,8 @@ export function ArExperience() {
               custom={i}
               variants={fadeUp}
               whileHover={{
-                borderColor: "rgba(255,179,0,0.3)",
-                background: "rgba(255,179,0,0.04)",
+                borderColor: "rgba(196,154,42,0.3)",
+                background: "rgba(196,154,42,0.04)",
                 y: -2,
                 transition: { duration: 0.2 },
               }}
@@ -378,8 +359,8 @@ export function ArExperience() {
                 flexDirection: "column",
                 gap: "10px",
                 padding: "20px 18px",
-                background: "rgba(255,179,0,0.02)",
-                border: "1px solid rgba(255,179,0,0.1)",
+                background: "rgba(196,154,42,0.02)",
+                border: "1px solid rgba(196,154,42,0.1)",
                 borderRadius: "14px",
                 cursor: "default",
                 transition: "all 0.3s",

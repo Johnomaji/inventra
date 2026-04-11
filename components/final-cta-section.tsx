@@ -25,8 +25,8 @@ export function FinalCtaSection() {
       <div
         style={{
           background:
-            "linear-gradient(160deg, var(--bg2) 0%, rgba(0,229,255,0.06) 40%, rgba(124,77,255,0.06) 70%, var(--bg2) 100%)",
-          padding: "140px 24px",
+            "linear-gradient(160deg, var(--bg2) 0%, rgba(248,124,43,0.06) 40%, rgba(39,97,146,0.06) 70%, var(--bg2) 100%)",
+          padding: "96px 24px",
           position: "relative",
           overflow: "hidden",
         }}
@@ -54,7 +54,7 @@ export function FinalCtaSection() {
             width: "600px",
             height: "400px",
             background:
-              "radial-gradient(ellipse, rgba(0,229,255,0.1) 0%, transparent 70%)",
+              "radial-gradient(ellipse, rgba(248,124,43,0.1) 0%, transparent 70%)",
             top: "0%",
             left: "20%",
             pointerEvents: "none",
@@ -66,7 +66,7 @@ export function FinalCtaSection() {
             width: "500px",
             height: "400px",
             background:
-              "radial-gradient(ellipse, rgba(124,77,255,0.07) 0%, transparent 70%)",
+              "radial-gradient(ellipse, rgba(39,97,146,0.07) 0%, transparent 70%)",
             bottom: "0%",
             right: "20%",
             pointerEvents: "none",
@@ -111,13 +111,13 @@ export function FinalCtaSection() {
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
                 color: "var(--amber)",
-                background: "rgba(255,179,0,0.08)",
-                border: "1px solid rgba(255,179,0,0.2)",
+                background: "rgba(196,154,42,0.08)",
+                border: "1px solid rgba(196,154,42,0.2)",
                 padding: "7px 20px",
                 borderRadius: "100px",
               }}
             >
-              ▸ Limited Early Access — 500 Spots Remaining
+              ▸ Early Access Open — Lagos · Abuja · Accra · Nairobi
             </span>
           </motion.div>
 
@@ -139,11 +139,11 @@ export function FinalCtaSection() {
               marginBottom: "24px",
             }}
           >
-            <DecryptedText text="The Future of African" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <DecryptedText text="Your Stockouts" animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <br />
-            <DecryptedText text="Commerce Starts " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+            <DecryptedText text="End " animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             <em style={{ fontStyle: "normal", color: "var(--cyan)" }}>
-              <DecryptedText text="Now." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
+              <DecryptedText text="Here." animateOn="view" sequential revealDirection="start" speed={35} encryptedClassName="decrypted-char-encrypted" />
             </em>
           </motion.h2>
 
@@ -167,9 +167,9 @@ export function FinalCtaSection() {
               margin: "0 auto 52px",
             }}
           >
-            Every day you wait is inventory lost, decisions delayed, and ground
-            surrendered to competitors who move faster. Join 500 businesses
-            already reshaping how Africa manages commerce.
+            Every night you close without Inventra is a reorder missed, a
+            bestseller running dry, margin walking out the door. Join 500
+            businesses from Lagos to Accra who&apos;ve stopped guessing.
           </motion.p>
 
           {/* CTA + counter */}
@@ -205,7 +205,7 @@ export function FinalCtaSection() {
                   textDecoration: "none",
                   borderRadius: "12px",
                   boxShadow:
-                    "0 8px 40px rgba(0,229,255,0.25), 0 2px 8px rgba(0,0,0,0.15)",
+                    "0 8px 40px rgba(248,124,43,0.25), 0 2px 8px rgba(0,0,0,0.15)",
                   transition: "all 0.25s",
                 }}
               >

@@ -11,8 +11,8 @@ const caps = [
     desc: "AI demand forecasting & anomaly detection",
     badge: "LIVE",
     badgeColor: "var(--cyan)",
-    badgeBg: "rgba(0,229,255,0.1)",
-    badgeBorder: "rgba(0,229,255,0.2)",
+    badgeBg: "rgba(248,124,43,0.1)",
+    badgeBorder: "rgba(248,124,43,0.2)",
     accent: "var(--cyan)",
   },
   {
@@ -21,8 +21,8 @@ const caps = [
     desc: "Real-world inventory overlay & scanning",
     badge: "BETA",
     badgeColor: "var(--cyan)",
-    badgeBg: "rgba(0,229,255,0.1)",
-    badgeBorder: "rgba(0,229,255,0.2)",
+    badgeBg: "rgba(248,124,43,0.1)",
+    badgeBorder: "rgba(248,124,43,0.2)",
     accent: "var(--amber)",
   },
   {
@@ -31,9 +31,9 @@ const caps = [
     desc: "Immersive multi-location management",
     badge: "Q3 2025",
     badgeColor: "var(--amber)",
-    badgeBg: "rgba(255,179,0,0.1)",
-    badgeBorder: "rgba(255,179,0,0.2)",
-    accent: "#a67cff",
+    badgeBg: "rgba(196,154,42,0.1)",
+    badgeBorder: "rgba(196,154,42,0.2)",
+    accent: "#5b9fd4",
   },
   {
     icon: "📡",
@@ -41,8 +41,8 @@ const caps = [
     desc: "Supplier network & logistics API",
     badge: "LIVE",
     badgeColor: "var(--cyan)",
-    badgeBg: "rgba(0,229,255,0.1)",
-    badgeBorder: "rgba(0,229,255,0.2)",
+    badgeBg: "rgba(248,124,43,0.1)",
+    badgeBorder: "rgba(248,124,43,0.2)",
     accent: "var(--cyan)",
   },
 ];
@@ -60,19 +60,19 @@ const pills = [
 
 const pillColors: Record<string, React.CSSProperties> = {
   cyan: {
-    background: "rgba(0,229,255,0.06)",
-    border: "1px solid rgba(0,229,255,0.15)",
+    background: "rgba(248,124,43,0.06)",
+    border: "1px solid rgba(248,124,43,0.15)",
     color: "var(--cyan)",
   },
   amber: {
-    background: "rgba(255,179,0,0.06)",
-    border: "1px solid rgba(255,179,0,0.15)",
+    background: "rgba(196,154,42,0.06)",
+    border: "1px solid rgba(196,154,42,0.15)",
     color: "var(--amber)",
   },
   violet: {
-    background: "rgba(124,77,255,0.06)",
-    border: "1px solid rgba(124,77,255,0.15)",
-    color: "#a67cff",
+    background: "rgba(39,97,146,0.06)",
+    border: "1px solid rgba(39,97,146,0.15)",
+    color: "#5b9fd4",
   },
 };
 
@@ -94,7 +94,7 @@ export function ProductSection() {
     <section
       id="product"
       style={{
-        padding: "120px 24px",
+        padding: "80px 24px",
         background: "var(--bg2)",
         overflow: "hidden",
         position: "relative",
@@ -107,7 +107,7 @@ export function ProductSection() {
           width: "600px",
           height: "500px",
           background:
-            "radial-gradient(ellipse, rgba(0,229,255,0.05) 0%, transparent 65%)",
+            "radial-gradient(ellipse, rgba(248,124,43,0.05) 0%, transparent 65%)",
           top: "20%",
           left: "-100px",
           pointerEvents: "none",
@@ -116,7 +116,7 @@ export function ProductSection() {
 
       <div
         style={{
-          maxWidth: "1120px",
+          maxWidth: "1280px",
           margin: "0 auto",
           position: "relative",
           zIndex: 1,
@@ -137,26 +137,6 @@ export function ProductSection() {
           }}
         >
           <div>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
-                color: "var(--cyan)",
-                fontFamily:
-                  "var(--font-space-mono), Space Mono, monospace",
-                fontSize: "0.68rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                padding: "7px 18px",
-                borderRadius: "100px",
-                marginBottom: "20px",
-              }}
-            >
-              ◎ Introducing Inventra
-            </div>
             <h2
               style={{
                 fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -262,7 +242,7 @@ export function ProductSection() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "rgba(0,229,255,0.08)",
+                    background: "rgba(248,124,43,0.08)",
                     borderRadius: "10px",
                     fontSize: "1.1rem",
                   }}

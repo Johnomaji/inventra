@@ -14,7 +14,7 @@ const logos = [
 
 const testimonials = [
   {
-    initials: "AC",
+    image: "/testimonial1.jpg",
     name: "Adaeze Chibuike",
     role: "CEO · FMCG Distributor, Lagos",
     text: "Within 6 days of beta access, our stockout rate dropped by more than half. The AI flagged 3 SKUs we had been overstocking for months. I don't know how we managed without it.",
@@ -22,7 +22,7 @@ const testimonials = [
     highlight: "stockout rate dropped by more than half",
   },
   {
-    initials: "IB",
+    image: "/testimonial2.jpg",
     name: "Ibrahim Balogun",
     role: "Operations Director · PharmaNet",
     text: "We manage 4 pharmacies across Abuja. Before Inventra, stock reconciliation took 3 people two full days. Now the AR scan does it in under 10 minutes. Game-changing isn't the word.",
@@ -30,7 +30,7 @@ const testimonials = [
     highlight: null,
   },
   {
-    initials: "FO",
+    image: "/testimonial3.jpg",
     name: "Fatima Ouédraogo",
     role: "Founder · TradeLink West Africa",
     text: "The VR dashboard isn't just cool — it's operationally transformative. I ran a full multi-warehouse review from my phone on a bus. That kind of access used to require a flight.",
@@ -57,8 +57,8 @@ const fadeUp = {
 
 export function SocialProof() {
   return (
-    <section id="social-proof" style={{ padding: "120px 24px", background: "var(--bg2)" }}>
-      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+    <section id="social-proof" style={{ padding: "80px 24px", background: "var(--bg2)" }}>
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -67,25 +67,6 @@ export function SocialProof() {
           transition={{ duration: 0.7 }}
           style={{ marginBottom: "60px", textAlign: "center" }}
         >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: "rgba(0,229,255,0.08)",
-              border: "1px solid rgba(0,229,255,0.2)",
-              color: "var(--cyan)",
-              fontFamily: "var(--font-space-mono), Space Mono, monospace",
-              fontSize: "0.68rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              padding: "7px 18px",
-              borderRadius: "100px",
-              marginBottom: "20px",
-            }}
-          >
-            ◎ Early Traction
-          </div>
           <h2
             style={{
               fontSize: "clamp(2rem, 4vw, 3.4rem)",
@@ -226,25 +207,19 @@ export function SocialProof() {
             <div
               style={{ display: "flex", alignItems: "center", gap: "16px" }}
             >
-              <div
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={testimonials[0].image}
+                alt={testimonials[0].name}
                 style={{
                   width: "52px",
                   height: "52px",
                   borderRadius: "16px",
-                  background:
-                    "linear-gradient(135deg, var(--cyan), var(--violet))",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "var(--font-syne), Syne, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "0.9rem",
-                  color: "var(--bg)",
+                  objectFit: "cover",
                   flexShrink: 0,
+                  border: "2px solid var(--border-strong)",
                 }}
-              >
-                AC
-              </div>
+              />
               <div>
                 <div
                   style={{
@@ -323,25 +298,19 @@ export function SocialProof() {
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "12px" }}
                 >
-                  <div
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={t.image}
+                    alt={t.name}
                     style={{
                       width: "38px",
                       height: "38px",
                       borderRadius: "10px",
-                      background:
-                        "linear-gradient(135deg, var(--cyan), var(--violet))",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontFamily: "var(--font-syne), Syne, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "0.74rem",
-                      color: "var(--bg)",
+                      objectFit: "cover",
                       flexShrink: 0,
+                      border: "2px solid var(--border)",
                     }}
-                  >
-                    {t.initials}
-                  </div>
+                  />
                   <div>
                     <div
                       style={{

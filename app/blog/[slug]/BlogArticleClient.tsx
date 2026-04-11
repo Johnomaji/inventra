@@ -5,9 +5,9 @@ import Link from "next/link";
 import type { Post } from "@/lib/blog-data";
 
 const colorMap: Record<string, { bg: string; border: string; color: string }> = {
-  cyan: { bg: "rgba(0,229,255,0.08)", border: "rgba(0,229,255,0.2)", color: "var(--cyan)" },
-  amber: { bg: "rgba(255,179,0,0.08)", border: "rgba(255,179,0,0.2)", color: "var(--amber)" },
-  violet: { bg: "rgba(124,77,255,0.08)", border: "rgba(124,77,255,0.2)", color: "#a67cff" },
+  cyan: { bg: "rgba(248,124,43,0.08)", border: "rgba(248,124,43,0.2)", color: "var(--cyan)" },
+  amber: { bg: "rgba(196,154,42,0.08)", border: "rgba(196,154,42,0.2)", color: "var(--amber)" },
+  violet: { bg: "rgba(39,97,146,0.08)", border: "rgba(39,97,146,0.2)", color: "#5b9fd4" },
 };
 
 const easing = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -213,8 +213,8 @@ export default function BlogArticleClient({ post }: { post: Post }) {
         style={{
           marginTop: "80px",
           padding: "40px",
-          background: "rgba(0,229,255,0.04)",
-          border: "1px solid rgba(0,229,255,0.15)",
+          background: "rgba(248,124,43,0.04)",
+          border: "1px solid rgba(248,124,43,0.15)",
           borderRadius: "12px",
           textAlign: "center",
         }}

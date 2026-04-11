@@ -64,14 +64,14 @@ export default function ContactPage() {
       <main style={{ paddingTop: "80px", background: "var(--bg)", minHeight: "100vh" }}>
         {/* Hero */}
         <div style={{ padding: "60px 24px 48px", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+          <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
             <div
               style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
-                background: "rgba(0,229,255,0.08)",
-                border: "1px solid rgba(0,229,255,0.2)",
+                background: "rgba(248,124,43,0.08)",
+                border: "1px solid rgba(248,124,43,0.2)",
                 color: "var(--cyan)",
                 fontFamily: "var(--font-space-mono), Space Mono, monospace",
                 fontSize: "0.7rem",
@@ -93,15 +93,15 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "60px 24px 100px" }}>
-          <div style={{ maxWidth: "1120px" }} className="contact-grid">
+        <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "60px 24px 100px" }}>
+          <div style={{ maxWidth: "1280px" }} className="contact-grid">
             {/* Form */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               {submitted ? (
                 <div
                   style={{
-                    background: "rgba(0,229,255,0.05)",
-                    border: "1px solid rgba(0,229,255,0.2)",
+                    background: "rgba(248,124,43,0.05)",
+                    border: "1px solid rgba(248,124,43,0.2)",
                     borderRadius: "14px",
                     padding: "48px",
                     textAlign: "center",
@@ -256,8 +256,8 @@ export default function ContactPage() {
                     key={office.city}
                     style={{
                       padding: "20px 24px",
-                      background: office.primary ? "rgba(0,229,255,0.04)" : "var(--surface)",
-                      border: office.primary ? "1px solid rgba(0,229,255,0.15)" : "1px solid var(--border)",
+                      background: office.primary ? "rgba(248,124,43,0.04)" : "var(--surface)",
+                      border: office.primary ? "1px solid rgba(248,124,43,0.15)" : "1px solid var(--border)",
                       borderRadius: "10px",
                     }}
                   >
@@ -268,8 +268,8 @@ export default function ContactPage() {
                       {office.primary && (
                         <span
                           style={{
-                            background: "rgba(0,229,255,0.1)",
-                            border: "1px solid rgba(0,229,255,0.2)",
+                            background: "rgba(248,124,43,0.1)",
+                            border: "1px solid rgba(248,124,43,0.2)",
                             color: "var(--cyan)",
                             fontFamily: "var(--font-space-mono), Space Mono, monospace",
                             fontSize: "0.58rem",
