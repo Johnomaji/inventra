@@ -123,7 +123,7 @@ export function HeroSection() {
               animateOn="view"
               sequential
               revealDirection="start"
-              speed={35}
+              speed={55}
               encryptedClassName="decrypted-char-encrypted"
             />
             <br />
@@ -143,7 +143,7 @@ export function HeroSection() {
                 animateOn="view"
                 sequential
                 revealDirection="start"
-                speed={35}
+                speed={55}
                 encryptedClassName="decrypted-char-encrypted"
               />
             </span>
