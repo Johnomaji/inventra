@@ -675,10 +675,7 @@ body::before {
   animation: slideDown 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* Logo — invert for light mode if SVG is white */
-.light .nav-logo {
-  filter: brightness(0) invert(0);
-}
+
 
 /* DecryptedText — scrambled character style */
 .decrypted-char-encrypted {

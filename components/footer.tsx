@@ -68,7 +68,7 @@ export function Footer() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/inventralogo.svg"
+                src="/inventralogo.png"
                 alt="Inventra"
                 style={{ height: "32px", width: "auto", display: "block" }}
                 className="nav-logo"

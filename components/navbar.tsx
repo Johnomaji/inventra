@@ -89,7 +89,7 @@ export function Navbar() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/inventralogo.svg"
+            src="/inventralogo.png"
             alt="Inventra"
             style={{
               height: "36px",
