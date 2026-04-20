@@ -40,16 +40,16 @@ const team = [
     linkedin: "#",
     twitter: "#",
   },
-  {
-    name: "Emeka Osei",
-    role: "Chief Product Officer",
-    roleShort: "CPO",
-    roleColor: "rose",
-    image: "/team4.jpg",
-    bio: "Emeka shapes the product experience that merchants and partners interact with every day. He brings a user-first philosophy to everything Inventra ships — obsessing over clarity, speed, and value for businesses across the continent.",
-    linkedin: "#",
-    twitter: "#",
-  },
+  // {
+  //   name: "Emeka Osei",
+  //   role: "Chief Product Officer",
+  //   roleShort: "CPO",
+  //   roleColor: "rose",
+  //   image: "/team4.jpg",
+  //   bio: "Emeka shapes the product experience that merchants and partners interact with every day. He brings a user-first philosophy to everything Inventra ships — obsessing over clarity, speed, and value for businesses across the continent.",
+  //   linkedin: "#",
+  //   twitter: "#",
+  // },
 ];
 
 const colorMap: Record<string, { bg: string; border: string; color: string; glow: string }> = {
@@ -87,7 +87,7 @@ export default function TeamPage() {
         <style>{`
           .team-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 32px;
           }
           .team-card {
@@ -255,7 +255,7 @@ export default function TeamPage() {
         </section>
 
         {/* Team Cards */}
-        <section style={{ maxWidth: "960px", margin: "0 auto", padding: "72px 24px 100px" }}>
+        <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "72px 24px 100px" }}>
           <div className="team-grid">
             {team.map((member) => {
               const c = colorMap[member.roleColor];
