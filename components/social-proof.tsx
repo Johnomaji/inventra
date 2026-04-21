@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { DecryptedText } from "@/components/decrypted-text";
+import { useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const logos = [
   "Y Combinator",
@@ -55,7 +57,31 @@ const fadeUp = {
   }),
 };
 
+const smallTestimonials = testimonials.slice(1);
+
 export function SocialProof() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollTo = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const clamped = Math.max(0, Math.min(index, smallTestimonials.length - 1));
+    const cardWidth = el.clientWidth * 0.8;
+    const gap = el.clientWidth * 0.04;
+    el.scrollTo({ left: clamped * (cardWidth + gap), behavior: "smooth" });
+    setActiveIndex(clamped);
+  };
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.clientWidth * 0.8;
+    const gap = el.clientWidth * 0.04;
+    const index = Math.round(el.scrollLeft / (cardWidth + gap));
+    setActiveIndex(Math.max(0, Math.min(index, smallTestimonials.length - 1)));
+  };
+
   return (
     <section id="social-proof" style={{ padding: "80px 24px", background: "var(--bg2)" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
@@ -119,10 +145,33 @@ export function SocialProof() {
           </div>
         </div>
 
-        {/* Testimonials — featured large + 2 stacked */}
+        {/* Testimonials label */}
+        <div style={{ marginBottom: "24px", display: "flex", alignItems: "center", gap: "12px" }}>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: "rgba(248,124,43,0.08)",
+              border: "1px solid rgba(248,124,43,0.2)",
+              color: "var(--cyan)",
+              fontFamily: "var(--font-space-mono), Space Mono, monospace",
+              fontSize: "0.68rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              padding: "7px 16px",
+              borderRadius: "2px",
+            }}
+          >
+            ◈ Customer Testimonials
+          </div>
+          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
+        </div>
+
+        {/* Testimonials — desktop: featured large + 2 stacked */}
         <div
+          className="hidden md:grid"
           style={{
-            display: "grid",
             gridTemplateColumns: "3fr 2fr",
             gap: "16px",
             alignItems: "start",
@@ -144,7 +193,6 @@ export function SocialProof() {
               boxShadow: "0 8px 48px rgba(0,0,0,0.08)",
             }}
           >
-            {/* Top gradient bar */}
             <div
               style={{
                 position: "absolute",
@@ -152,13 +200,10 @@ export function SocialProof() {
                 left: 0,
                 right: 0,
                 height: "3px",
-                background:
-                  "linear-gradient(90deg, var(--cyan), var(--violet))",
+                background: "linear-gradient(90deg, var(--cyan), var(--violet))",
                 borderRadius: "24px 24px 0 0",
               }}
             />
-
-            {/* Large quote mark */}
             <div
               style={{
                 fontFamily: "var(--font-syne), Syne, sans-serif",
@@ -172,7 +217,6 @@ export function SocialProof() {
             >
               &ldquo;
             </div>
-
             <p
               style={{
                 fontSize: "1.1rem",
@@ -183,30 +227,14 @@ export function SocialProof() {
               }}
             >
               Within 6 days of beta access, our{" "}
-              <em
-                style={{
-                  fontStyle: "normal",
-                  color: "var(--cyan)",
-                  fontWeight: 600,
-                }}
-              >
+              <em style={{ fontStyle: "normal", color: "var(--cyan)", fontWeight: 600 }}>
                 stockout rate dropped by more than half
               </em>
               . The AI flagged 3 SKUs we had been overstocking for months. I
               don&apos;t know how we managed without it.
             </p>
-
-            <div
-              style={{
-                height: "1px",
-                background: "var(--border)",
-                marginBottom: "24px",
-              }}
-            />
-
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "16px" }}
-            >
+            <div style={{ height: "1px", background: "var(--border)", marginBottom: "24px" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={testimonials[0].image}
@@ -221,24 +249,10 @@ export function SocialProof() {
                 }}
               />
               <div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-syne), Syne, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "1rem",
-                  }}
-                >
+                <div style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 700, fontSize: "1rem" }}>
                   Adaeze Chibuike
                 </div>
-                <div
-                  style={{
-                    fontSize: "0.72rem",
-                    color: "var(--muted)",
-                    fontFamily:
-                      "var(--font-space-mono), Space Mono, monospace",
-                    marginTop: "2px",
-                  }}
-                >
+                <div style={{ fontSize: "0.72rem", color: "var(--muted)", fontFamily: "var(--font-space-mono), Space Mono, monospace", marginTop: "2px" }}>
                   CEO · FMCG Distributor, Lagos
                 </div>
               </div>
@@ -247,17 +261,13 @@ export function SocialProof() {
 
           {/* Right column — 2 stacked */}
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            {testimonials.slice(1).map((t, i) => (
+            {smallTestimonials.map((t, i) => (
               <motion.div
                 key={t.name}
                 initial={{ opacity: 0, x: 24 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.15 + 0.2,
-                  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-                }}
+                transition={{ duration: 0.6, delay: i * 0.15 + 0.2, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 style={{
                   background: "var(--surface)",
@@ -283,59 +293,225 @@ export function SocialProof() {
                 >
                   &ldquo;
                 </div>
-
-                <p
-                  style={{
-                    fontSize: "0.86rem",
-                    color: "var(--muted)",
-                    lineHeight: 1.8,
-                    marginBottom: "20px",
-                  }}
-                >
+                <p style={{ fontSize: "0.86rem", color: "var(--muted)", lineHeight: 1.8, marginBottom: "20px" }}>
                   {t.text}
                 </p>
-
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "12px" }}
-                >
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={t.image}
                     alt={t.name}
-                    style={{
-                      width: "38px",
-                      height: "38px",
-                      borderRadius: "10px",
-                      objectFit: "cover",
-                      flexShrink: 0,
-                      border: "2px solid var(--border)",
-                    }}
+                    style={{ width: "38px", height: "38px", borderRadius: "10px", objectFit: "cover", flexShrink: 0, border: "2px solid var(--border)" }}
                   />
                   <div>
-                    <div
-                      style={{
-                        fontFamily: "var(--font-syne), Syne, sans-serif",
-                        fontWeight: 700,
-                        fontSize: "0.86rem",
-                      }}
-                    >
+                    <div style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 700, fontSize: "0.86rem" }}>
                       {t.name}
                     </div>
-                    <div
-                      style={{
-                        fontSize: "0.68rem",
-                        color: "var(--muted)",
-                        fontFamily:
-                          "var(--font-space-mono), Space Mono, monospace",
-                        marginTop: "1px",
-                      }}
-                    >
+                    <div style={{ fontSize: "0.68rem", color: "var(--muted)", fontFamily: "var(--font-space-mono), Space Mono, monospace", marginTop: "1px" }}>
                       {t.role}
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+
+        {/* Testimonials — mobile: featured full-width + carousel for last two */}
+        <div className="block md:hidden">
+          {/* Featured */}
+          <div
+            style={{
+              background: "var(--surface2)",
+              border: "1px solid var(--border-strong)",
+              borderRadius: "20px",
+              padding: "32px 28px",
+              position: "relative",
+              overflow: "hidden",
+              marginBottom: "16px",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "3px",
+                background: "linear-gradient(90deg, var(--cyan), var(--violet))",
+                borderRadius: "20px 20px 0 0",
+              }}
+            />
+            <div
+              style={{
+                fontFamily: "var(--font-syne), Syne, sans-serif",
+                fontSize: "5rem",
+                color: "var(--cyan)",
+                opacity: 0.08,
+                lineHeight: 0.8,
+                marginBottom: "12px",
+                fontWeight: 800,
+              }}
+            >
+              &ldquo;
+            </div>
+            <p style={{ fontSize: "0.95rem", color: "var(--text2)", lineHeight: 1.85, marginBottom: "28px", fontWeight: 300 }}>
+              Within 6 days of beta access, our{" "}
+              <em style={{ fontStyle: "normal", color: "var(--cyan)", fontWeight: 600 }}>
+                stockout rate dropped by more than half
+              </em>
+              . The AI flagged 3 SKUs we had been overstocking for months. I
+              don&apos;t know how we managed without it.
+            </p>
+            <div style={{ height: "1px", background: "var(--border)", marginBottom: "20px" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={testimonials[0].image}
+                alt={testimonials[0].name}
+                style={{ width: "44px", height: "44px", borderRadius: "12px", objectFit: "cover", flexShrink: 0, border: "2px solid var(--border-strong)" }}
+              />
+              <div>
+                <div style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 700, fontSize: "0.95rem" }}>
+                  Adaeze Chibuike
+                </div>
+                <div style={{ fontSize: "0.68rem", color: "var(--muted)", fontFamily: "var(--font-space-mono), Space Mono, monospace", marginTop: "2px" }}>
+                  CEO · FMCG Distributor, Lagos
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel for last two */}
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            style={{
+              display: "flex",
+              overflowX: "auto",
+              scrollSnapType: "x mandatory",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+              gap: "4vw",
+              paddingLeft: "10vw",
+              paddingRight: "10vw",
+              paddingBottom: "4px",
+            }}
+          >
+            {smallTestimonials.map((t) => (
+              <div
+                key={t.name}
+                style={{
+                  scrollSnapAlign: "center",
+                  flex: "0 0 80vw",
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "20px",
+                  padding: "28px 24px",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "16px",
+                    right: "16px",
+                    fontFamily: "var(--font-syne), Syne, sans-serif",
+                    fontSize: "2.5rem",
+                    color: "var(--cyan)",
+                    opacity: 0.1,
+                    lineHeight: 1,
+                  }}
+                >
+                  &ldquo;
+                </div>
+                <p style={{ fontSize: "0.86rem", color: "var(--muted)", lineHeight: 1.8, marginBottom: "20px" }}>
+                  {t.text}
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    style={{ width: "38px", height: "38px", borderRadius: "10px", objectFit: "cover", flexShrink: 0, border: "2px solid var(--border)" }}
+                  />
+                  <div>
+                    <div style={{ fontFamily: "var(--font-syne), Syne, sans-serif", fontWeight: 700, fontSize: "0.86rem" }}>
+                      {t.name}
+                    </div>
+                    <div style={{ fontSize: "0.68rem", color: "var(--muted)", fontFamily: "var(--font-space-mono), Space Mono, monospace", marginTop: "1px" }}>
+                      {t.role}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Carousel controls */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "20px" }}>
+            <button
+              onClick={() => scrollTo(activeIndex - 1)}
+              disabled={activeIndex === 0}
+              style={{
+                background: activeIndex === 0 ? "var(--surface)" : "var(--surface2)",
+                border: "1px solid var(--border)",
+                borderRadius: "50%",
+                width: "40px",
+                height: "40px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: activeIndex === 0 ? "not-allowed" : "pointer",
+                color: activeIndex === 0 ? "var(--muted)" : "var(--text)",
+                transition: "all 0.2s",
+                flexShrink: 0,
+              }}
+              aria-label="Previous"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+              {smallTestimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollTo(i)}
+                  style={{
+                    width: i === activeIndex ? "20px" : "6px",
+                    height: "6px",
+                    borderRadius: "3px",
+                    background: i === activeIndex ? "var(--cyan)" : "var(--border-strong)",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    transition: "all 0.25s",
+                  }}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => scrollTo(activeIndex + 1)}
+              disabled={activeIndex === smallTestimonials.length - 1}
+              style={{
+                background: activeIndex === smallTestimonials.length - 1 ? "var(--surface)" : "var(--surface2)",
+                border: "1px solid var(--border)",
+                borderRadius: "50%",
+                width: "40px",
+                height: "40px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: activeIndex === smallTestimonials.length - 1 ? "not-allowed" : "pointer",
+                color: activeIndex === smallTestimonials.length - 1 ? "var(--muted)" : "var(--text)",
+                transition: "all 0.2s",
+                flexShrink: 0,
+              }}
+              aria-label="Next"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
         </div>
       </div>
