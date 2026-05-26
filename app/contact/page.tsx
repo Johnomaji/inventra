@@ -17,9 +17,9 @@ const contactReasons = [
 ];
 
 const offices = [
-  { city: "Lagos", country: "Nigeria", address: "14 Bisi Ogabi Street, Victoria Island", email: "lagos@inventra.org", primary: true },
-  { city: "Accra", country: "Ghana", address: "Cantonments, Accra (Q3 2026)", email: "accra@inventra.org", primary: false },
-  { city: "Nairobi", country: "Kenya", address: "Westlands, Nairobi (Q4 2026)", email: "nairobi@inventra.org", primary: false },
+  { city: "Lagos", country: "Nigeria", address: "14 Bisi Ogabi Street, Victoria Island", email: "lagos@getinventra.org", primary: true },
+  { city: "Accra", country: "Ghana", address: "Cantonments, Accra (Q3 2026)", email: "accra@getinventra.org", primary: false },
+  { city: "Nairobi", country: "Kenya", address: "Westlands, Nairobi (Q4 2026)", email: "nairobi@getinventra.org", primary: false },
 ];
 
 export default function ContactPage() {
@@ -215,11 +215,11 @@ export default function ContactPage() {
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "48px" }}>
                 {[
-                  { label: "Sales & Partnerships", email: "sales@inventra.org", icon: "💼" },
-                  { label: "Press & Media", email: "press@inventra.org", icon: "📰" },
-                  { label: "Technical Support", email: "support@inventra.org", icon: "🛠️" },
-                  { label: "Investor Relations", email: "investors@inventra.org", icon: "📈" },
-                  { label: "Privacy & Legal", email: "legal@inventra.org", icon: "⚖️" },
+                  { label: "Sales & Partnerships", email: "sales@getinventra.org", icon: "💼" },
+                  { label: "Press & Media", email: "press@getinventra.org", icon: "📰" },
+                  { label: "Technical Support", email: "support@getinventra.org", icon: "🛠️" },
+                  { label: "Investor Relations", email: "investors@getinventra.org", icon: "📈" },
+                  { label: "Privacy & Legal", email: "legal@getinventra.org", icon: "⚖️" },
                 ].map((item) => (
                   <div
                     key={item.email}
