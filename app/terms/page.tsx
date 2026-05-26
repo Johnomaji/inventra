@@ -140,7 +140,7 @@ export default function TermsPage() {
           >
             <p style={{ color: "var(--muted)", fontSize: "0.88rem", lineHeight: 1.7 }}>
               Questions about these terms? Contact our legal team at{" "}
-              <span style={{ color: "var(--cyan)" }}>legal@inventra.ai</span>
+              <span style={{ color: "var(--cyan)" }}>support@getinventra.org</span>
             </p>
           </div>
         </div>

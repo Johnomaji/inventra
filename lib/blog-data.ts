@@ -103,7 +103,7 @@ export const posts: Post[] = [
       },
       {
         heading: "How to Get AR 2.0",
-        text: "AR 2.0 is rolling out to all Inventra Pro and Enterprise customers over the next two weeks. Growth plan users will get access in May. If you are on the early access waitlist, expect an invite in your inbox by end of April. As always, your feedback shapes the roadmap — reach out to product@inventra.ai with anything you want to see next.",
+        text: "AR 2.0 is rolling out to all Inventra Pro and Enterprise customers over the next two weeks. Growth plan users will get access in May. If you are on the early access waitlist, expect an invite in your inbox by end of April. As always, your feedback shapes the roadmap — reach out to product@inventra.org with anything you want to see next.",
       },
     ],
   },
@@ -304,7 +304,7 @@ export const posts: Post[] = [
       },
       {
         heading: "What's Coming Next",
-        text: "Hausa language support is in development for Q2 2026, targeting our expanding user base in Kano, Kaduna, and Abuja. We are also building voice query support for hands-free use during warehouse walks — say your question out loud while doing a shelf audit, get the answer through your earpiece. If there are other languages or query patterns you want to see supported, write to product@inventra.ai.",
+        text: "Hausa language support is in development for Q2 2026, targeting our expanding user base in Kano, Kaduna, and Abuja. We are also building voice query support for hands-free use during warehouse walks — say your question out loud while doing a shelf audit, get the answer through your earpiece. If there are other languages or query patterns you want to see supported, write to product@inventra.org.",
       },
     ],
   },

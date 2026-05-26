@@ -26,7 +26,7 @@ const sections = [
   },
   {
     title: "Your Rights (African Data Subjects)",
-    content: `Under the Nigeria Data Protection Regulation (NDPR), South Africa's POPIA, Kenya's Data Protection Act, and other applicable African data laws, you have the right to: access your personal data, correct inaccurate data, request deletion of your data, object to processing, and data portability. To exercise these rights, contact privacy@inventra.ai.`,
+    content: `Under the Nigeria Data Protection Regulation (NDPR), South Africa's POPIA, Kenya's Data Protection Act, and other applicable African data laws, you have the right to: access your personal data, correct inaccurate data, request deletion of your data, object to processing, and data portability. To exercise these rights, contact support@getinventra.org.`,
   },
   {
     title: "Cookies and Tracking",
@@ -42,7 +42,7 @@ const sections = [
   },
   {
     title: "Contact Us",
-    content: `For privacy-related inquiries, contact our Data Protection Officer at privacy@inventra.ai or write to: Inventra Technologies Ltd., 14 Bisi Ogabi Street, Victoria Island, Lagos, Nigeria.`,
+    content: `For privacy-related inquiries, contact our Data Protection Officer at support@getinventra.org or write to: Inventra Technologies Ltd., 14 Bisi Ogabi Street, Victoria Island, Lagos, Nigeria.`,
   },
 ];
 
